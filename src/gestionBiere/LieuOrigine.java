@@ -9,6 +9,8 @@ public class LieuOrigine {
 
     public LieuOrigine() {
         identifiant = UUID.randomUUID().toString();
+        nom = "";
+        paysAppartenance = "";
     }
 
     public LieuOrigine(String nom, String paysAppartenance) {
