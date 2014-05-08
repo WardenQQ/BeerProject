@@ -1,21 +1,26 @@
 package gestionBiere;
 
-import java.util.UUID;
+import java.util.ArrayList;
 
 public class Breuvage {
-    private final String identifiant;
-
+	private static int compteur = 1;
+    private final int identifiant;
     private String nom;
-    double tauxAlcool;
-    int anneeOrigine;
-    Brasserie brasserie;
-    String couleur;
-    String fermentation;
-    String provenance;
-    LieuOrigine lieuOrigine;
-
+    private double tauxAlcool;
+    private int anneeOrigine;
+    private Brasserie brasserie;
+    private String couleur;
+    private String fermentation;
+    private String provenance;
+    private LieuOrigine lieuOrigine;
+    private ArrayList<Commentaire> com_degustation;
+    private ArrayList<Commentaire> com_libre;
+    
     public Breuvage() {
-        identifiant = UUID.randomUUID().toString();
+        identifiant = compteur;
+        compteur++;
+        this.com_degustation = new ArrayList<Commentaire>();
+        this.com_libre = new ArrayList<Commentaire>();
     }
 
     public String getNom() { return nom; }
@@ -41,4 +46,19 @@ public class Breuvage {
 
     public LieuOrigine getLieuOrigine() { return lieuOrigine; }
     public void setLieuOrigine(LieuOrigine lieuOrigine) { this.lieuOrigine = lieuOrigine; };
+    
+    public int getIdentifiant() 
+    {
+		return identifiant;
+	}
+    
+    public void ajoutComDegustation(Commentaire com_degustation)
+    {
+    	this.com_degustation.add(com_degustation);
+    }
+    
+    public void ajoutComLibre(Commentaire com_libre)
+    {
+    	this.com_libre.add(com_libre);
+    }
 }

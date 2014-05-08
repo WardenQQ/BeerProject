@@ -1,17 +1,18 @@
 package gestionBiere;
 
-import java.util.UUID;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Commentaire {
-	private final String identifiant;
+	private static int compteur = 1;
+    private final int identifiant;
 	private String nom;
 	private String date;
 	private String texte;
 	
 	public Commentaire() {
-		identifiant = UUID.randomUUID().toString();
+		identifiant = compteur;
+		compteur++;
 	}
 	public Commentaire(String nom1, String texte1) {
 		this();
@@ -26,7 +27,7 @@ public class Commentaire {
 	public String getDate() {
 		return this.date;
 	}
-	public String getIdentifiant() {
+	public int getIdentifiant() {
 		return identifiant;
 	}
 	public void setNom(String nom1) {

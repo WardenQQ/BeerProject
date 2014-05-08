@@ -1,14 +1,14 @@
 package gestionBiere;
 
-import java.util.UUID;
-
 public class Brasserie {
-    private final String identifiant;
+	private static int compteur = 1;
+    private final int identifiant;
     private String nom;
     private LieuOrigine lieuOrigine;
 
     public Brasserie() {
-        identifiant = UUID.randomUUID().toString();
+        identifiant = compteur;
+        compteur++;
         nom = "";
         lieuOrigine = new LieuOrigine();
     }
@@ -19,7 +19,7 @@ public class Brasserie {
         this.lieuOrigine = lieuOrigine;
     }
 
-    public String getIdentifiant() { return identifiant;}
+    public int getIdentifiant() { return identifiant;}
 
     public String getNom() { return nom;}
     public void setNom(String nom) { this.nom = nom;}
