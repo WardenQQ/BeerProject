@@ -4,18 +4,18 @@ import java.util.UUID;
 public class Bouteille {
 	
 	final private String id_Bouteille;
-	private int taille;
-	private String type_bouteille; // a modifier en objet bouteille
+	private int taille = 0;
+	private String type_bouteille = ""; // a modifier en objet bouteille
 	private Bouchon bouchon;
-	private String lien_photo; // a verifier
-	private String breuvage; // a modifier en objet breuvage
+	private String lien_photo = ""; // a verifier
+	private Breuvage breuvage; // a modifier en objet breuvage
 	
 	public Bouteille()
 	{
 		this.id_Bouteille = UUID.randomUUID().toString();
 	}
 	
-	public Bouteille(int taille,String type_bouteille,Bouchon bouchon,String lien_photo,String breuvage)
+	public Bouteille(int taille,String type_bouteille,Bouchon bouchon,String lien_photo,Breuvage breuvage)
 	{
 		this();
 		setBouchon(bouchon);
@@ -30,7 +30,7 @@ public class Bouteille {
 		this.bouchon = bouchon;
 	}
 	
-	public void setBreuvage(String breuvage)
+	public void setBreuvage(Breuvage breuvage)
 	{
 		this.breuvage = breuvage;
 	}
@@ -70,7 +70,7 @@ public class Bouteille {
 		return this.lien_photo;
 	}
 	
-	public String getBreuvage()
+	public Breuvage getBreuvage()
 	{
 		return this.breuvage;
 	}
