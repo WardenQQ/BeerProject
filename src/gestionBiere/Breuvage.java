@@ -1,9 +1,10 @@
 package gestionBiere;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Breuvage {
-	private static int compteur = 1;
+public class Breuvage implements Serializable {
+    private static int compteur = 1;
     private final int identifiant;
     private String nom;
     private double tauxAlcool;

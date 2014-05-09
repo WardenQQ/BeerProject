@@ -1,6 +1,8 @@
 package gestionBiere;
 
-public class Brasserie {
+import java.io.Serializable;
+
+public class Brasserie implements Serializable {
 	private static int compteur = 1;
     private final int identifiant;
     private String nom;

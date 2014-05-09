@@ -1,6 +1,8 @@
 package gestionBiere;
 
-public class LieuOrigine {
+import java.io.Serializable;
+
+public class LieuOrigine implements Serializable {
     private String nom;
     private String paysAppartenance;
 

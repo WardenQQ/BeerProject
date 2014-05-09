@@ -1,9 +1,10 @@
 package gestionBiere;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Commentaire {
+public class Commentaire implements Serializable {
 	private static int compteur = 1;
     private final int identifiant;
 	private String nom;

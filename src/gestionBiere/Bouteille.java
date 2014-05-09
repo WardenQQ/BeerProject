@@ -1,6 +1,8 @@
 package gestionBiere;
 
-public class Bouteille {
+import java.io.Serializable;
+
+public class Bouteille implements Serializable {
 	private static int compteur = 1;
 	private final int idBouteille;
 	private int taille = 0;
