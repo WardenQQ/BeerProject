@@ -100,35 +100,51 @@ public class BaseDonnee {
     }
 
     public void ajoutBouteille(Bouteille nouvelleBouteille) {
-        listeBouteille.add(nouvelleBouteille);
+        if (!listeBouteille.contains(nouvelleBouteille)) {
+            listeBouteille.add(nouvelleBouteille);
+        }
     }
 
     public void ajoutBreuvage(Breuvage nouvelleBreuvage) {
-        listeBreuvage.add(nouvelleBreuvage);
+        if (!listeBreuvage.contains(nouvelleBreuvage)) {
+            listeBreuvage.add(nouvelleBreuvage);
+        }
     }
 
     public void ajoutBrasserie(Brasserie nouvelleBrasserie) {
-        listeBrasserie.add(nouvelleBrasserie);
+        if (!listeBrasserie.contains(nouvelleBrasserie)) {
+            listeBrasserie.add(nouvelleBrasserie);
+        }
     }
 
     public void ajoutLieuOrigine(LieuOrigine nouvelleLieuOrigine) {
-        listeLieuOrigine.add(nouvelleLieuOrigine);
+        if (!listeLieuOrigine.contains(nouvelleLieuOrigine)) {
+            listeLieuOrigine.add(nouvelleLieuOrigine);
+        }
     }
 
     public void ajoutCouleur(String nouvelleCouleur) {
-        listeCouleur.add(nouvelleCouleur);
+        if (!listeCouleur.contains(nouvelleCouleur)) {
+            listeCouleur.add(nouvelleCouleur);
+        }
     }
 
     public void ajoutFermentation(String nouvelleFermentation) {
-        listeFermentation.add(nouvelleFermentation);
+        if (!listeFermentation.contains(nouvelleFermentation)) {
+            listeFermentation.add(nouvelleFermentation);
+        }
     }
 
     public void ajoutTypeFermentation(String nouvelleTypeFermentation) {
-        listeTypeFermentation.add(nouvelleTypeFermentation);
+        if (!listeTypeFermentation.contains(nouvelleTypeFermentation)) {
+            listeTypeFermentation.add(nouvelleTypeFermentation);
+        }
     }
 
     public void ajoutProvenance(String nouvelleProvenance) {
-        listeProvenance.add(nouvelleProvenance);
+        if (!listeProvenance.contains(nouvelleProvenance)) {
+            listeProvenance.add(nouvelleProvenance);
+        }
     }
 
     public void suppressionBouteille(Bouteille nouvelleBouteille) {
