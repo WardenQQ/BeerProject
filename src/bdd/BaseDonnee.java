@@ -121,4 +121,36 @@ public class BaseDonnee {
     public void ajoutProvenance(String nouvelleProvenance) {
         listeProvenance.add(nouvelleProvenance);
     }
+
+    public void suppressionBouteille(Bouteille nouvelleBouteille) {
+        listeBouteille.remove(nouvelleBouteille);
+    }
+
+    public void suppressionBreuvage(Breuvage nouvelleBreuvage) {
+        listeBreuvage.remove(nouvelleBreuvage);
+    }
+
+    public void suppressionBrasserie(Brasserie nouvelleBrasserie) {
+        listeBrasserie.remove(nouvelleBrasserie);
+    }
+
+    public void suppressionLieuOrigine(LieuOrigine nouvelleLieuOrigine) {
+        listeLieuOrigine.remove(nouvelleLieuOrigine);
+    }
+
+    public void suppressionCouleur(String nouvelleCouleur) {
+        listeCouleur.remove(nouvelleCouleur);
+    }
+
+    public void suppressionFermentation(String nouvelleFermentation) {
+        listeFermentation.remove(nouvelleFermentation);
+    }
+
+    public void suppressionTypeFermentation(String nouvelleTypeFermentation) {
+        listeTypeFermentation.remove(nouvelleTypeFermentation);
+    }
+
+    public void suppressionProvenance(String nouvelleProvenance) {
+        listeProvenance.remove(nouvelleProvenance);
+    }
 }
