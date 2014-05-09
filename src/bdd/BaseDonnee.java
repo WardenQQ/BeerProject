@@ -33,6 +33,15 @@ public class BaseDonnee {
             listeProvenance = new ArrayList<String>();
     }
 
+    public ArrayList<Bouteille> getListeBouteille() { return listeBouteille; }
+    public ArrayList<Breuvage> getListeBreuvage() { return listeBreuvage; }
+    public ArrayList<Brasserie> getListeBrasserie() { return listeBrasserie; }
+    public ArrayList<LieuOrigine> getListeLieuOrigine() { return listeLieuOrigine; }
+    public ArrayList<String> getListeCouleur() { return listeCouleur; }
+    public ArrayList<String> getListeFermentation() { return listeFermentation; }
+    public ArrayList<String> getListeTypeFermentation() { return listeTypeFermentation; }
+    public ArrayList<String> getListeProvenance() { return listeProvenance; }
+
     public BaseDonnee(String nomFichier) {
         this();
         charger(nomFichier);
