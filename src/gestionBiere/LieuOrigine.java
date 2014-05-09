@@ -18,13 +18,15 @@ public class LieuOrigine implements Serializable {
     }
 
     public boolean equals(Object obj) {
+        boolean isEqual = false;
+
         if (obj instanceof LieuOrigine) {
             LieuOrigine lieuOrigine = (LieuOrigine)obj;
-            return this.nom.equals(lieuOrigine.nom) &&
-                   this.paysAppartenance.equals(lieuOrigine.paysAppartenance);
+            isEqual = this.nom == lieuOrigine.nom &&
+                      this.paysAppartenance == lieuOrigine.paysAppartenance;
         }
 
-        return false;
+        return isEqual;
     }
 
     public String getNom() { return nom; }

@@ -4,12 +4,14 @@ import java.io.Serializable;
 
 public class Bouteille implements Serializable {
 	private static int compteur = 1;
+
 	private final int idBouteille;
+
 	private int taille = 0;
 	private String type = ""; 
-	private String bouchon;
+	private String bouchon = "";
 	private String lienPhoto = ""; 
-	private Breuvage breuvage; 
+	private Breuvage breuvage = new Breuvage; 
 	
 	public Bouteille()
 	{
@@ -29,15 +31,17 @@ public class Bouteille implements Serializable {
 	}
 
         public boolean equals(Object obj) {
+            boolean isEqual = false;
+
             if (obj instanceof Bouteille) {
                 Bouteille bouteille = (Bouteille)obj;
-                return this.taille == bouteille.taille &&
-                       this.type.equals(bouteille.type) &&
-                       this.bouchon.equals(bouteille.bouchon) &&
-                       this.breuvage.equals(bouteille.breuvage);
+                isEqual = this.taille == bouteille.taille &&
+                          this.type.equals(bouteille.type) &&
+                          this.bouchon.equals(bouteille.bouchon) &&
+                          this.breuvage.equals(bouteille.breuvage);
             }
 
-            return false;
+            return isEqual;
         }
 	
 	public void setBouchon(String bouchon)

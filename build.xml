@@ -11,7 +11,9 @@
 
     <target name="compile">
         <mkdir dir="${classes.dir}"/>
-        <javac srcdir="${src.dir}" destdir="${classes.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${classes.dir}">
+            <compilerarg line="-g -Xlint"/>
+        </javac>
     </target>
 
     <target name="jar" depends="compile">
