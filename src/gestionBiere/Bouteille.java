@@ -2,28 +2,28 @@ package gestionBiere;
 
 public class Bouteille {
 	private static int compteur = 1;
-	private final int id_Bouteille;
+	private final int idBouteille;
 	private int taille = 0;
-	private String type_bouteille = ""; 
+	private String typeBouteille = ""; 
 	private String bouchon;
-	private String lien_photo = ""; 
+	private String lienPhoto = ""; 
 	private Breuvage breuvage; 
 	
 	public Bouteille()
 	{
-		this.id_Bouteille = compteur;
+		this.idBouteille = compteur;
 		compteur++;
 		this.breuvage = new Breuvage();
 	}
 	
-	public Bouteille(int taille,String type_bouteille,String bouchon,String lien_photo,Breuvage breuvage)
+	public Bouteille(int taille,String typeBouteille,String bouchon,String lienPhoto,Breuvage breuvage)
 	{
 		this();
 		setBouchon(bouchon);
 		setBreuvage(breuvage);
-		setTypeBouteille(type_bouteille);
+		setTypeBouteille(typeBouteille);
 		setTailleBouteille(taille);
-		setLienPhoto(lien_photo);
+		setLienPhoto(lienPhoto);
 	}
 	
 	public void setBouchon(String bouchon)
@@ -36,9 +36,9 @@ public class Bouteille {
 		this.breuvage = breuvage;
 	}
 	
-	public void setTypeBouteille(String type_bouteille)
+	public void setTypeBouteille(String typeBouteille)
 	{
-		this.type_bouteille = type_bouteille;
+		this.typeBouteille = typeBouteille;
 	}
 	
 	public void setTailleBouteille(int taille)
@@ -46,9 +46,9 @@ public class Bouteille {
 		this.taille = taille;
 	}
 	
-	public void setLienPhoto(String lien_photo)
+	public void setLienPhoto(String lienPhoto)
 	{
-		this.lien_photo = lien_photo;
+		this.lienPhoto = lienPhoto;
 	}
 	
 	public String getBouchon()
@@ -63,12 +63,12 @@ public class Bouteille {
 	
 	public String getTypeBouteille()
 	{
-		return this.type_bouteille;
+		return this.typeBouteille;
 	}
 	
 	public String getLienPhoto()
 	{
-		return this.lien_photo;
+		return this.lienPhoto;
 	}
 	
 	public Breuvage getBreuvage()
@@ -78,6 +78,6 @@ public class Bouteille {
 	
 	public int getIdBouteille()
 	{
-		return this.id_Bouteille;
+		return this.idBouteille;
 	}
 }
