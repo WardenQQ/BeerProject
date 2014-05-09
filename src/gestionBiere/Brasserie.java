@@ -21,6 +21,16 @@ public class Brasserie implements Serializable {
         this.lieuOrigine = lieuOrigine;
     }
 
+    public boolean equals(Object obj) {
+        if (obj instanceof Brasserie) {
+            Brasserie brasserie = (Brasserie)obj;
+            return this.nom.equals(brasserie.nom) &&
+                   this.lieuOrigine.equals(brasserie.lieuOrigine);
+        }
+
+        return false;
+    }
+
     public int getIdentifiant() { return identifiant;}
 
     public String getNom() { return nom;}

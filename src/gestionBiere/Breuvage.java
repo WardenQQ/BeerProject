@@ -12,6 +12,7 @@ public class Breuvage implements Serializable {
     private Brasserie brasserie;
     private String couleur;
     private String fermentation;
+    private String typeFermentation;
     private String provenance;
     private LieuOrigine lieuOrigine;
     private ArrayList<Commentaire> com_degustation;
@@ -22,6 +23,21 @@ public class Breuvage implements Serializable {
         compteur++;
         this.com_degustation = new ArrayList<Commentaire>();
         this.com_libre = new ArrayList<Commentaire>();
+    }
+
+    public boolean equals(Object obj) {
+        if (obj instanceof Breuvage) {
+            Breuvage breuvage = (Breuvage)obj;
+            return this.nom == breuvage.nom &&
+                   this.tauxAlcool == breuvage.tauxAlcool &&
+                   this.anneeOrigine == breuvage.anneeOrigine &&
+                   this.couleur == breuvage.couleur &&
+                   this.fermentation == breuvage.fermentation &&
+                   this.typeFermentation == breuvage.typeFermentation &&
+                   this.provenance == breuvage.provenance &&
+                   this.brasserie.equals(breuvage.brasserie) &&
+                   this.lieuOrigine.equals(breuvage.lieuOrigine);
+        }
     }
 
     public String getNom() { return nom; }

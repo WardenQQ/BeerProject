@@ -6,7 +6,7 @@ public class Bouteille implements Serializable {
 	private static int compteur = 1;
 	private final int idBouteille;
 	private int taille = 0;
-	private String typeBouteille = ""; 
+	private String type = ""; 
 	private String bouchon;
 	private String lienPhoto = ""; 
 	private Breuvage breuvage; 
@@ -18,15 +18,27 @@ public class Bouteille implements Serializable {
 		this.breuvage = new Breuvage();
 	}
 	
-	public Bouteille(int taille,String typeBouteille,String bouchon,String lienPhoto,Breuvage breuvage)
+	public Bouteille(int taille,String type,String bouchon,String lienPhoto,Breuvage breuvage)
 	{
 		this();
 		setBouchon(bouchon);
 		setBreuvage(breuvage);
-		setTypeBouteille(typeBouteille);
+		setType(type);
 		setTailleBouteille(taille);
 		setLienPhoto(lienPhoto);
 	}
+
+        public boolean equals(Object obj) {
+            if (obj instanceof Bouteille) {
+                Bouteille bouteille = (Bouteille)obj;
+                return this.taille == bouteille.taille &&
+                       this.type.equals(bouteille.type) &&
+                       this.bouchon.equals(bouteille.bouchon) &&
+                       this.breuvage.equals(bouteille.breuvage);
+            }
+
+            return false;
+        }
 	
 	public void setBouchon(String bouchon)
 	{
@@ -38,9 +50,9 @@ public class Bouteille implements Serializable {
 		this.breuvage = breuvage;
 	}
 	
-	public void setTypeBouteille(String typeBouteille)
+	public void setType(String type)
 	{
-		this.typeBouteille = typeBouteille;
+		this.type = type;
 	}
 	
 	public void setTailleBouteille(int taille)
@@ -63,9 +75,9 @@ public class Bouteille implements Serializable {
 		return this.taille;
 	}
 	
-	public String getTypeBouteille()
+	public String getType()
 	{
-		return this.typeBouteille;
+		return this.type;
 	}
 	
 	public String getLienPhoto()
