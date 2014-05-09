@@ -1,21 +1,22 @@
 package gestionBiere;
-import java.util.UUID;
 
 public class Bouteille {
-	
-	final private String id_Bouteille;
+	private static int compteur = 1;
+	private final int id_Bouteille;
 	private int taille = 0;
-	private String type_bouteille = ""; // a modifier en objet bouteille
-	private Bouchon bouchon;
-	private String lien_photo = ""; // a verifier
-	private Breuvage breuvage; // a modifier en objet breuvage
+	private String type_bouteille = ""; 
+	private String bouchon;
+	private String lien_photo = ""; 
+	private Breuvage breuvage; 
 	
 	public Bouteille()
 	{
-		this.id_Bouteille = UUID.randomUUID().toString();
+		this.id_Bouteille = compteur;
+		compteur++;
+		this.breuvage = new Breuvage();
 	}
 	
-	public Bouteille(int taille,String type_bouteille,Bouchon bouchon,String lien_photo,Breuvage breuvage)
+	public Bouteille(int taille,String type_bouteille,String bouchon,String lien_photo,Breuvage breuvage)
 	{
 		this();
 		setBouchon(bouchon);
@@ -25,7 +26,7 @@ public class Bouteille {
 		setLienPhoto(lien_photo);
 	}
 	
-	public void setBouchon(Bouchon bouchon)
+	public void setBouchon(String bouchon)
 	{
 		this.bouchon = bouchon;
 	}
@@ -50,7 +51,7 @@ public class Bouteille {
 		this.lien_photo = lien_photo;
 	}
 	
-	public Bouchon getBouchon()
+	public String getBouchon()
 	{
 		return this.bouchon;
 	}
@@ -75,7 +76,7 @@ public class Bouteille {
 		return this.breuvage;
 	}
 	
-	public String getIdBouteille()
+	public int getIdBouteille()
 	{
 		return this.id_Bouteille;
 	}
