@@ -3,15 +3,15 @@ package gestionBiere;
 import java.io.Serializable;
 
 public class Bouteille implements Serializable {
-    private static final long serialVersionUID = 0L;
+    private static final long serialVersionUID = 1L;
 
     private static int compteur = 1;
 
     private final int identifiant;
 
     private int taille = 0;
-    private String type = ""; 
-    private String bouchon = "";
+    private StringBuffer type = new StringBuffer(); 
+    private StringBuffer bouchon = new StringBuffer();
     private String lienPhoto = ""; 
     private Breuvage breuvage = new Breuvage(); 
 
@@ -20,7 +20,7 @@ public class Bouteille implements Serializable {
         compteur++;
     }
 
-    public Bouteille(int taille, String type, String bouchon, String lienPhoto, Breuvage breuvage) {
+    public Bouteille(int taille, StringBuffer type, StringBuffer bouchon, String lienPhoto, Breuvage breuvage) {
         this();
         setBouchon(bouchon);
         setBreuvage(breuvage);
@@ -47,16 +47,16 @@ public class Bouteille implements Serializable {
         this.taille = taille;
     }
 
-    public void setType(String type) {
+    public void setType(StringBuffer type) {
         if (type == null) {
-            type = new String();
+            type = new StringBuffer();
         }
         this.type = type;
     }
 
-    public void setBouchon(String bouchon) {
+    public void setBouchon(StringBuffer bouchon) {
         if (bouchon == null) {
-            bouchon = new String();
+            bouchon = new StringBuffer();
         }
         this.bouchon = bouchon;
     }
@@ -76,7 +76,7 @@ public class Bouteille implements Serializable {
     }
 
     public String getBouchon() {
-        return this.bouchon;
+        return this.bouchon.toString();
     }
 
     public int getTaille() {
@@ -84,7 +84,7 @@ public class Bouteille implements Serializable {
     }
 
     public String getType() {
-        return this.type;
+        return this.type.toString();
     }
 
     public String getLienPhoto() {
