@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Breuvage implements Serializable {
+    private static final long serialVersionUID = 0L;
+
     private static int compteur = 1;
 
     private final int identifiant;
@@ -17,14 +19,12 @@ public class Breuvage implements Serializable {
     private String provenance = "";
     private Brasserie brasserie = new Brasserie();
     private LieuOrigine lieuOrigine = new LieuOrigine();
-    private ArrayList<Commentaire> com_degustation = null;
-    private ArrayList<Commentaire> com_libre = null;
+    private Commentaire commentaireDegustation = new Commentaire();
+    private Commentaire commentaireLibre = new Commentaire();
     
     public Breuvage() {
         identifiant = compteur;
         compteur++;
-        this.com_degustation = new ArrayList<Commentaire>();
-        this.com_libre = new ArrayList<Commentaire>();
     }
 
     public boolean equals(Object obj) {
@@ -47,7 +47,12 @@ public class Breuvage implements Serializable {
     }
 
     public String getNom() { return nom; }
-    public void setNom(String nom) { this.nom = nom; }
+    public void setNom(String nom) {
+        if (nom == null) {
+            nom = new String();
+        }
+        this.nom = nom;
+    }
 
     public double getTauxAlcool() { return tauxAlcool; }
     public void setTauxAlcool(double tauxAlcool) { this.tauxAlcool = tauxAlcool; }
@@ -56,31 +61,62 @@ public class Breuvage implements Serializable {
     public void setAnneeOrigine(int anneeOrigine) { this.anneeOrigine = anneeOrigine; }
 
     public Brasserie getBrasserie() { return brasserie; }
-    public void setBrasserie(Brasserie brasserie) { this.brasserie = brasserie; }
+    public void setBrasserie(Brasserie brasserie) {
+        if (brasserie == null) {
+            brasserie = new Brasserie();
+        }
+        this.brasserie = brasserie;
+    }
 
     public String getCouleur() { return couleur; }
-    public void setCouleur(String couleur) { this.couleur = couleur; }
+    public void setCouleur(String couleur) {
+        if (couleur == null) {
+            couleur = new String();
+        }
+        this.couleur = couleur;
+    }
 
     public String getFermentation() { return fermentation; }
-    public void setFermentation(String fermentation) { this.fermentation = fermentation; }
+    public void setFermentation(String fermentation) {
+        if (fermentation == null) {
+            fermentation = new String();
+        }
+        this.fermentation = fermentation;
+    }
 
     public String getProvenance() { return provenance; }
-    public void setProvenance(String provenance) { this.provenance = provenance; }
+    public void setProvenance(String provenance) {
+        if (provenance == null) {
+            provenance = new String();
+        }
+        this.provenance = provenance;
+    }
 
     public LieuOrigine getLieuOrigine() { return lieuOrigine; }
-    public void setLieuOrigine(LieuOrigine lieuOrigine) { this.lieuOrigine = lieuOrigine; }
+    public void setLieuOrigine(LieuOrigine lieuOrigine) {
+        if (lieuOrigine == null) {
+            lieuOrigine = new LieuOrigine();
+        }
+        this.lieuOrigine = lieuOrigine;
+    }
     
     public int getIdentifiant() {
         return identifiant;
     }
-    
-    public void ajoutComDegustation(Commentaire com_degustation)
-    {
-    	this.com_degustation.add(com_degustation);
+
+    public Commentaire getCommentaireDegustation() { return commentaireDegustation; }
+    public void setCommentaireDegustation(Commentaire commentaireDegustation) {
+        if (commentaireDegustation == null) {
+            commentaireDegustation = new Commentaire();
+        }
+        this.commentaireDegustation = commentaireDegustation;
     }
     
-    public void ajoutComLibre(Commentaire com_libre)
-    {
-    	this.com_libre.add(com_libre);
+    public Commentaire getCommentaireLibre() { return commentaireLibre; }
+    public void setCommentaireLibre(Commentaire commentaireLibre) {
+        if (commentaireLibre == null) {
+            commentaireLibre = new Commentaire();
+        }
+        this.commentaireLibre = commentaireLibre;
     }
 }

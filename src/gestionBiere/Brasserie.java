@@ -3,6 +3,8 @@ package gestionBiere;
 import java.io.Serializable;
 
 public class Brasserie implements Serializable {
+    private static final long serialVersionUID = 0L;
+
     private static int compteur = 1;
 
     private final int identifiant;
@@ -13,8 +15,6 @@ public class Brasserie implements Serializable {
     public Brasserie() {
         identifiant = compteur;
         compteur++;
-        nom = "";
-        lieuOrigine = new LieuOrigine();
     }
 
     public Brasserie(String nom, LieuOrigine lieuOrigine) {
@@ -38,8 +38,18 @@ public class Brasserie implements Serializable {
     public int getIdentifiant() { return identifiant;}
 
     public String getNom() { return nom;}
-    public void setNom(String nom) { this.nom = nom;}
+    public void setNom(String nom) {
+        if (nom == null) {
+            nom = new String();
+        }
+        this.nom = nom;
+    }
 
     public LieuOrigine getLieuOrigine() { return lieuOrigine;}
-    public void setLieuOrigine(LieuOrigine lieuOrigine) { this.lieuOrigine = lieuOrigine; }
+    public void setLieuOrigine(LieuOrigine lieuOrigine) {
+        if (lieuOrigine == null) {
+            lieuOrigine = new LieuOrigine();
+        }
+        this.lieuOrigine = lieuOrigine;
+    }
 }

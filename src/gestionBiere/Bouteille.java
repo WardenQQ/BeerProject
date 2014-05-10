@@ -3,6 +3,8 @@ package gestionBiere;
 import java.io.Serializable;
 
 public class Bouteille implements Serializable {
+    private static final long serialVersionUID = 0L;
+
     private static int compteur = 1;
 
     private final int identifiant;
@@ -41,24 +43,36 @@ public class Bouteille implements Serializable {
         return isEqual;
     }
 
-    public void setBouchon(String bouchon) {
-        this.bouchon = bouchon;
-    }
-
-    public void setBreuvage(Breuvage breuvage) {
-        this.breuvage = breuvage;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public void setTailleBouteille(int taille) {
         this.taille = taille;
     }
 
+    public void setType(String type) {
+        if (type == null) {
+            type = new String();
+        }
+        this.type = type;
+    }
+
+    public void setBouchon(String bouchon) {
+        if (bouchon == null) {
+            bouchon = new String();
+        }
+        this.bouchon = bouchon;
+    }
+
     public void setLienPhoto(String lienPhoto) {
+        if (lienPhoto == null) {
+            lienPhoto = new String();
+        }
         this.lienPhoto = lienPhoto;
+    }
+
+    public void setBreuvage(Breuvage breuvage) {
+        if (breuvage == null) {
+            breuvage = new Breuvage();
+        }
+        this.breuvage = breuvage;
     }
 
     public String getBouchon() {
