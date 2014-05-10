@@ -11,20 +11,44 @@ public class Breuvage implements Serializable {
     private final int identifiant;
 
     private String nom = "";
+    private Brasserie brasserie = new Brasserie();
+    private LieuOrigine lieuOrigine = new LieuOrigine();
     private double tauxAlcool = 0.0;
     private int anneeOrigine = 0;
     private String couleur = "";
     private String fermentation = "";
     private String typeFermentation= "";
     private String provenance = "";
-    private Brasserie brasserie = new Brasserie();
-    private LieuOrigine lieuOrigine = new LieuOrigine();
     private Commentaire commentaireDegustation = new Commentaire();
     private Commentaire commentaireLibre = new Commentaire();
     
     public Breuvage() {
         identifiant = compteur;
         compteur++;
+    }
+
+    public Breuvage(String nom,
+            Brasserie brasserie,
+            LieuOrigine lieuOrigine,
+            double tauxAlcool,
+            int anneeOrigine,
+            String couleur,
+            String fermentation,
+            String typeFermentation,
+            String provenance,
+            Commentaire commentaireDegustation,
+            Commentaire commentaireLibre) {
+        this();
+        setNom(nom);
+        setBrasserie(brasserie);
+        setLieuOrigine(lieuOrigine);
+        setTauxAlcool(tauxAlcool);
+        setCouleur(couleur);
+        setFermentation(fermentation);
+        setTypeFermentation(typeFermentation);
+        setProvenance(provenance);
+        setCommentaireDegustation(commentaireDegustation);
+        setCommentaireLibre(commentaireLibre);
     }
 
     public boolean equals(Object obj) {
@@ -82,6 +106,14 @@ public class Breuvage implements Serializable {
             fermentation = new String();
         }
         this.fermentation = fermentation;
+    }
+
+    public String getTypeFermentation() { return typeFermentation; }
+    public void setTypeFermentation(String typeFermentation) {
+        if (typeFermentation == null) {
+            typeFermentation = new String();
+        }
+        this.typeFermentation = typeFermentation;
     }
 
     public String getProvenance() { return provenance; }

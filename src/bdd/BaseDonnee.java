@@ -21,6 +21,8 @@ public class BaseDonnee {
     private ArrayList<String> listeFermentation;
     private ArrayList<String> listeTypeFermentation;
     private ArrayList<String> listeProvenance;
+    private ArrayList<String> listeTypeBouteille;
+    private ArrayList<String> listeBouchon;
 
     public BaseDonnee() {
             listeBouteille = new ArrayList<Bouteille>();
@@ -64,6 +66,8 @@ public class BaseDonnee {
             os.writeObject(listeFermentation);
             os.writeObject(listeTypeFermentation);
             os.writeObject(listeProvenance);
+            os.writeObject(listeTypeBouteille);
+            os.writeObject(listeBouchon);
 
             os.close();
             aSauve = true;
@@ -90,6 +94,8 @@ public class BaseDonnee {
                 listeFermentation = (ArrayList<String>)is.readObject();
                 listeTypeFermentation = (ArrayList<String>)is.readObject();
                 listeProvenance = (ArrayList<String>)is.readObject();
+                listeTypeBouteille = (ArrayList<String>)is.readObject();
+                listeBouchon = (ArrayList<String>)is.readObject();
 
                 is.close();
                 aCharge = true;
@@ -149,6 +155,18 @@ public class BaseDonnee {
         }
     }
 
+    public void ajoutTypeBouteille(String nouvelleBouteille) {
+        if (!listeTypeBouteille.contains(nouvelleBouteille)) {
+            listeTypeBouteille.add(nouvelleBouteille);
+        }
+    }
+
+    public void ajoutBouchon(String nouvelleBouchon) {
+        if (!listeBouchon.contains(nouvelleBouchon)) {
+            listeBouchon.add(nouvelleBouchon);
+        }
+    }
+
     public void suppressionBouteille(Bouteille nouvelleBouteille) {
         listeBouteille.remove(nouvelleBouteille);
     }
@@ -179,5 +197,13 @@ public class BaseDonnee {
 
     public void suppressionProvenance(String nouvelleProvenance) {
         listeProvenance.remove(nouvelleProvenance);
+    }
+
+    public void suppressionTypeBouteille(String nouvelleTypeBouteille) {
+        listeTypeBouteille.remove(nouvelleTypeBouteille);
+    }
+
+    public void suppressionBouchon(String nouvelleBouchon) {
+        listeBouchon.remove(nouvelleBouchon);
     }
 }
