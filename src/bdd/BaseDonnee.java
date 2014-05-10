@@ -50,6 +50,7 @@ public class BaseDonnee {
         this.nomFichier = nomFichier;
     }
     
+    @SuppressWarnings("unchecked")
     public boolean sauvegarder(String nomFichier) {
         boolean aSauve = false;
         try {
@@ -73,6 +74,7 @@ public class BaseDonnee {
         return aSauve;
     }
 
+    @SuppressWarnings("unchecked")
     public boolean charger(String nomFichier) {
         boolean aCharge = false;
         File fichier = new File(nomFichier);
