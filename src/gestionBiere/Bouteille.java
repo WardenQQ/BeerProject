@@ -11,7 +11,7 @@ public class Bouteille implements Serializable {
 	private String type = ""; 
 	private String bouchon = "";
 	private String lienPhoto = ""; 
-	private Breuvage breuvage = new Breuvage; 
+	private Breuvage breuvage = new Breuvage(); 
 	
 	public Bouteille()
 	{
