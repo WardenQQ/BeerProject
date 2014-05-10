@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Breuvage implements Serializable {
-    private static final long serialVersionUID = 0L;
+    private static final long serialVersionUID = 1L;
 
     private static int compteur = 1;
 
@@ -15,10 +15,10 @@ public class Breuvage implements Serializable {
     private LieuOrigine lieuOrigine = new LieuOrigine();
     private double tauxAlcool = 0.0;
     private int anneeOrigine = 0;
-    private String couleur = "";
-    private String fermentation = "";
-    private String typeFermentation= "";
-    private String provenance = "";
+    private StringBuffer couleur = new StringBuffer();
+    private StringBuffer fermentation = new StringBuffer();
+    private StringBuffer typeFermentation = new StringBuffer();
+    private StringBuffer provenance = new StringBuffer();
     private Commentaire commentaireDegustation = new Commentaire();
     private Commentaire commentaireLibre = new Commentaire();
     
@@ -32,10 +32,10 @@ public class Breuvage implements Serializable {
             LieuOrigine lieuOrigine,
             double tauxAlcool,
             int anneeOrigine,
-            String couleur,
-            String fermentation,
-            String typeFermentation,
-            String provenance,
+            StringBuffer couleur,
+            StringBuffer fermentation,
+            StringBuffer typeFermentation,
+            StringBuffer provenance,
             Commentaire commentaireDegustation,
             Commentaire commentaireLibre) {
         this();
@@ -78,13 +78,26 @@ public class Breuvage implements Serializable {
         this.nom = nom;
     }
 
-    public double getTauxAlcool() { return tauxAlcool; }
-    public void setTauxAlcool(double tauxAlcool) { this.tauxAlcool = tauxAlcool; }
+    public double getTauxAlcool() {
+        return tauxAlcool;
+    }
 
-    public int getAnneeOrigine() { return anneeOrigine; }
-    public void setAnneeOrigine(int anneeOrigine) { this.anneeOrigine = anneeOrigine; }
+    public void setTauxAlcool(double tauxAlcool) {
+        this.tauxAlcool = tauxAlcool;
+    }
 
-    public Brasserie getBrasserie() { return brasserie; }
+    public int getAnneeOrigine() {
+        return anneeOrigine;
+    }
+
+    public void setAnneeOrigine(int anneeOrigine) {
+        this.anneeOrigine = anneeOrigine;
+    }
+
+    public Brasserie getBrasserie() {
+        return brasserie;
+    }
+
     public void setBrasserie(Brasserie brasserie) {
         if (brasserie == null) {
             brasserie = new Brasserie();
@@ -92,39 +105,54 @@ public class Breuvage implements Serializable {
         this.brasserie = brasserie;
     }
 
-    public String getCouleur() { return couleur; }
-    public void setCouleur(String couleur) {
+    public String getCouleur() {
+        return couleur.toString();
+    }
+
+    public void setCouleur(StringBuffer couleur) {
         if (couleur == null) {
-            couleur = new String();
+            couleur = new StringBuffer();
         }
         this.couleur = couleur;
     }
 
-    public String getFermentation() { return fermentation; }
-    public void setFermentation(String fermentation) {
+    public String getFermentation() {
+        return fermentation.toString();
+    }
+
+    public void setFermentation(StringBuffer fermentation) {
         if (fermentation == null) {
-            fermentation = new String();
+            fermentation = new StringBuffer();
         }
         this.fermentation = fermentation;
     }
 
-    public String getTypeFermentation() { return typeFermentation; }
-    public void setTypeFermentation(String typeFermentation) {
+    public String getTypeFermentation() {
+        return typeFermentation.toString();
+    }
+
+    public void setTypeFermentation(StringBuffer typeFermentation) {
         if (typeFermentation == null) {
-            typeFermentation = new String();
+            typeFermentation = new StringBuffer();
         }
         this.typeFermentation = typeFermentation;
     }
 
-    public String getProvenance() { return provenance; }
-    public void setProvenance(String provenance) {
+    public String getProvenance() {
+        return provenance.toString();
+    }
+
+    public void setProvenance(StringBuffer provenance) {
         if (provenance == null) {
-            provenance = new String();
+            provenance = new StringBuffer();
         }
         this.provenance = provenance;
     }
 
-    public LieuOrigine getLieuOrigine() { return lieuOrigine; }
+    public LieuOrigine getLieuOrigine() {
+        return lieuOrigine;
+    }
+
     public void setLieuOrigine(LieuOrigine lieuOrigine) {
         if (lieuOrigine == null) {
             lieuOrigine = new LieuOrigine();
@@ -136,7 +164,10 @@ public class Breuvage implements Serializable {
         return identifiant;
     }
 
-    public Commentaire getCommentaireDegustation() { return commentaireDegustation; }
+    public Commentaire getCommentaireDegustation() {
+        return commentaireDegustation;
+    }
+
     public void setCommentaireDegustation(Commentaire commentaireDegustation) {
         if (commentaireDegustation == null) {
             commentaireDegustation = new Commentaire();
@@ -144,7 +175,10 @@ public class Breuvage implements Serializable {
         this.commentaireDegustation = commentaireDegustation;
     }
     
-    public Commentaire getCommentaireLibre() { return commentaireLibre; }
+    public Commentaire getCommentaireLibre() {
+        return commentaireLibre;
+    }
+
     public void setCommentaireLibre(Commentaire commentaireLibre) {
         if (commentaireLibre == null) {
             commentaireLibre = new Commentaire();

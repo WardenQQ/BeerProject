@@ -17,32 +17,32 @@ public class BaseDonnee {
     private ArrayList<Breuvage> listeBreuvage;
     private ArrayList<Brasserie> listeBrasserie;
     private ArrayList<LieuOrigine> listeLieuOrigine;
-    private ArrayList<String> listeCouleur;
-    private ArrayList<String> listeFermentation;
-    private ArrayList<String> listeTypeFermentation;
-    private ArrayList<String> listeProvenance;
-    private ArrayList<String> listeTypeBouteille;
-    private ArrayList<String> listeBouchon;
+    private ArrayList<StringBuffer> listeCouleur;
+    private ArrayList<StringBuffer> listeFermentation;
+    private ArrayList<StringBuffer> listeTypeFermentation;
+    private ArrayList<StringBuffer> listeProvenance;
+    private ArrayList<StringBuffer> listeTypeBouteille;
+    private ArrayList<StringBuffer> listeBouchon;
 
     public BaseDonnee() {
             listeBouteille = new ArrayList<Bouteille>();
             listeBreuvage = new ArrayList<Breuvage>();
             listeBrasserie = new ArrayList<Brasserie>();
             listeLieuOrigine = new ArrayList<LieuOrigine>();
-            listeCouleur = new ArrayList<String>();
-            listeFermentation = new ArrayList<String>();
-            listeTypeFermentation = new ArrayList<String>();
-            listeProvenance = new ArrayList<String>();
+            listeCouleur = new ArrayList<StringBuffer>();
+            listeFermentation = new ArrayList<StringBuffer>();
+            listeTypeFermentation = new ArrayList<StringBuffer>();
+            listeProvenance = new ArrayList<StringBuffer>();
     }
 
     public ArrayList<Bouteille> getListeBouteille() { return listeBouteille; }
     public ArrayList<Breuvage> getListeBreuvage() { return listeBreuvage; }
     public ArrayList<Brasserie> getListeBrasserie() { return listeBrasserie; }
     public ArrayList<LieuOrigine> getListeLieuOrigine() { return listeLieuOrigine; }
-    public ArrayList<String> getListeCouleur() { return listeCouleur; }
-    public ArrayList<String> getListeFermentation() { return listeFermentation; }
-    public ArrayList<String> getListeTypeFermentation() { return listeTypeFermentation; }
-    public ArrayList<String> getListeProvenance() { return listeProvenance; }
+    public ArrayList<StringBuffer> getListeCouleur() { return listeCouleur; }
+    public ArrayList<StringBuffer> getListeFermentation() { return listeFermentation; }
+    public ArrayList<StringBuffer> getListeTypeFermentation() { return listeTypeFermentation; }
+    public ArrayList<StringBuffer> getListeProvenance() { return listeProvenance; }
 
     public BaseDonnee(String nomFichier) {
         this();
@@ -90,12 +90,12 @@ public class BaseDonnee {
                 listeBreuvage = (ArrayList<Breuvage>)is.readObject();
                 listeBrasserie = (ArrayList<Brasserie>)is.readObject();
                 listeLieuOrigine = (ArrayList<LieuOrigine>)is.readObject();
-                listeCouleur = (ArrayList<String>)is.readObject();
-                listeFermentation = (ArrayList<String>)is.readObject();
-                listeTypeFermentation = (ArrayList<String>)is.readObject();
-                listeProvenance = (ArrayList<String>)is.readObject();
-                listeTypeBouteille = (ArrayList<String>)is.readObject();
-                listeBouchon = (ArrayList<String>)is.readObject();
+                listeCouleur = (ArrayList<StringBuffer>)is.readObject();
+                listeFermentation = (ArrayList<StringBuffer>)is.readObject();
+                listeTypeFermentation = (ArrayList<StringBuffer>)is.readObject();
+                listeProvenance = (ArrayList<StringBuffer>)is.readObject();
+                listeTypeBouteille = (ArrayList<StringBuffer>)is.readObject();
+                listeBouchon = (ArrayList<StringBuffer>)is.readObject();
 
                 is.close();
                 aCharge = true;
@@ -131,37 +131,37 @@ public class BaseDonnee {
         }
     }
 
-    public void ajoutCouleur(String nouvelleCouleur) {
+    public void ajoutCouleur(StringBuffer nouvelleCouleur) {
         if (!listeCouleur.contains(nouvelleCouleur)) {
             listeCouleur.add(nouvelleCouleur);
         }
     }
 
-    public void ajoutFermentation(String nouvelleFermentation) {
+    public void ajoutFermentation(StringBuffer nouvelleFermentation) {
         if (!listeFermentation.contains(nouvelleFermentation)) {
             listeFermentation.add(nouvelleFermentation);
         }
     }
 
-    public void ajoutTypeFermentation(String nouvelleTypeFermentation) {
+    public void ajoutTypeFermentation(StringBuffer nouvelleTypeFermentation) {
         if (!listeTypeFermentation.contains(nouvelleTypeFermentation)) {
             listeTypeFermentation.add(nouvelleTypeFermentation);
         }
     }
 
-    public void ajoutProvenance(String nouvelleProvenance) {
+    public void ajoutProvenance(StringBuffer nouvelleProvenance) {
         if (!listeProvenance.contains(nouvelleProvenance)) {
             listeProvenance.add(nouvelleProvenance);
         }
     }
 
-    public void ajoutTypeBouteille(String nouvelleBouteille) {
+    public void ajoutTypeBouteille(StringBuffer nouvelleBouteille) {
         if (!listeTypeBouteille.contains(nouvelleBouteille)) {
             listeTypeBouteille.add(nouvelleBouteille);
         }
     }
 
-    public void ajoutBouchon(String nouvelleBouchon) {
+    public void ajoutBouchon(StringBuffer nouvelleBouchon) {
         if (!listeBouchon.contains(nouvelleBouchon)) {
             listeBouchon.add(nouvelleBouchon);
         }
@@ -183,27 +183,27 @@ public class BaseDonnee {
         listeLieuOrigine.remove(nouvelleLieuOrigine);
     }
 
-    public void suppressionCouleur(String nouvelleCouleur) {
+    public void suppressionCouleur(StringBuffer nouvelleCouleur) {
         listeCouleur.remove(nouvelleCouleur);
     }
 
-    public void suppressionFermentation(String nouvelleFermentation) {
+    public void suppressionFermentation(StringBuffer nouvelleFermentation) {
         listeFermentation.remove(nouvelleFermentation);
     }
 
-    public void suppressionTypeFermentation(String nouvelleTypeFermentation) {
+    public void suppressionTypeFermentation(StringBuffer nouvelleTypeFermentation) {
         listeTypeFermentation.remove(nouvelleTypeFermentation);
     }
 
-    public void suppressionProvenance(String nouvelleProvenance) {
+    public void suppressionProvenance(StringBuffer nouvelleProvenance) {
         listeProvenance.remove(nouvelleProvenance);
     }
 
-    public void suppressionTypeBouteille(String nouvelleTypeBouteille) {
+    public void suppressionTypeBouteille(StringBuffer nouvelleTypeBouteille) {
         listeTypeBouteille.remove(nouvelleTypeBouteille);
     }
 
-    public void suppressionBouchon(String nouvelleBouchon) {
+    public void suppressionBouchon(StringBuffer nouvelleBouchon) {
         listeBouchon.remove(nouvelleBouchon);
     }
 }
