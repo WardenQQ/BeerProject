@@ -12,7 +12,7 @@ public class LieuOrigineModele extends AbstractTableModel
 
     private final String[] entete = { "Identifiant", "Ville d'origine", "Pays d'origine" };
 
-    private ArrayList<LieuOrigine> listeLieuOrigine;
+    private static ArrayList<LieuOrigine> listeLieuOrigine;
     ArrayList<Observer> listeObserver;
 
     public LieuOrigineModele(ArrayList<LieuOrigine> listeLieuOrigine) {
@@ -92,5 +92,25 @@ public class LieuOrigineModele extends AbstractTableModel
         for (Observer ite : listeObserver) {
             ite.notify(string, obj);
         }
+    }
+
+    public static LieuOrigine rechercheVilleOrigine(String regex) {
+        for (LieuOrigine ite : listeLieuOrigine) {
+            if (ite.getNom().toString().matches(regex)) {
+                return ite;
+            }
+        }
+
+        return new LieuOrigine();
+    }
+
+    public static LieuOrigine recherchePaysOrigine(String regex) {
+        for (LieuOrigine ite : listeLieuOrigine) {
+            if (ite.getPaysAppartenance().toString().matches(regex)) {
+                return ite;
+            }
+        }
+
+        return new LieuOrigine();
     }
 }

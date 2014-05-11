@@ -57,7 +57,6 @@ public class Brasserie implements Serializable {
         this.lieuOrigine = lieuOrigine;
     }
 
-
     public static int getCompteur() {
         return compteur;
     }

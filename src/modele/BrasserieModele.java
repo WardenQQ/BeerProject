@@ -12,7 +12,7 @@ public class BrasserieModele extends AbstractTableModel implements Observer {
 
     private final String[] entete = {"Identifiant", "Nom de la Brasserie", "Ville d'origine", "Pays d'origine"};
 
-    private ArrayList<Brasserie> listeBrasserie;
+    private static ArrayList<Brasserie> listeBrasserie;
     ArrayList<Observer> listeObserver;
 
     public BrasserieModele(ArrayList<Brasserie> listeBrasserie) {
@@ -104,5 +104,15 @@ public class BrasserieModele extends AbstractTableModel implements Observer {
     				break;
     		}
     	}
+    }
+
+    public static Brasserie rechercheNomBrasserie(String regex) {
+        for (Brasserie ite : listeBrasserie) {
+            if (ite.getNom().toString().matches(regex)) {
+                return ite;
+            }
+        }
+
+        return new Brasserie();
     }
 }

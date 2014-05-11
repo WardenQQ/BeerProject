@@ -10,7 +10,7 @@ public class FermentationModele extends AbstractTableModel
 
     private final String[] entete = { "Fermentation" };
 
-    private ArrayList<StringBuffer> listeFermentation;
+    private static ArrayList<StringBuffer> listeFermentation;
     ArrayList<Observer> listeObserver;
 
     public FermentationModele(ArrayList<StringBuffer> listeFermentation) {
@@ -81,5 +81,15 @@ public class FermentationModele extends AbstractTableModel
         for (Observer ite : listeObserver) {
             ite.notify(string, obj);
         }
+    }
+
+    public static StringBuffer rechercheFermentation(String regex) {
+        for (StringBuffer ite : listeFermentation) {
+            if (ite.toString().matches(regex)) {
+                return ite;
+            }
+        }
+
+        return new StringBuffer();
     }
 }
