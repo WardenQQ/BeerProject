@@ -9,15 +9,15 @@ public class LieuOrigine implements Serializable {
 
     private final int identifiant;
 
-    private String nom = "";
-    private String paysAppartenance = "";
+    private StringBuffer nom = new StringBuffer();
+    private StringBuffer paysAppartenance = new StringBuffer();
 
     public LieuOrigine() {
         this.identifiant = compteur;
         compteur++;
     }
 
-    public LieuOrigine(String nom, String paysAppartenance) {
+    public LieuOrigine(StringBuffer nom, StringBuffer paysAppartenance) {
         this();
         setNom(nom);
         setPaysAppartenance(paysAppartenance);
@@ -37,18 +37,18 @@ public class LieuOrigine implements Serializable {
 
     public int getIdentifiant() { return identifiant; }
 
-    public String getNom() { return nom; }
-    public void setNom(String nom) {
+    public StringBuffer getNom() { return nom; }
+    public void setNom(StringBuffer nom) {
         if (nom == null) {
-            nom = new String();
+            nom = new StringBuffer();
         }
         this.nom = nom;
     }
 
-    public String getPaysAppartenance() { return paysAppartenance; }
-    public void setPaysAppartenance(String paysAppartenance) {
+    public StringBuffer getPaysAppartenance() { return paysAppartenance; }
+    public void setPaysAppartenance(StringBuffer paysAppartenance) {
         if (paysAppartenance == null) {
-            paysAppartenance = new String();
+            paysAppartenance = new StringBuffer();
         }
         this.paysAppartenance = paysAppartenance;
     }
