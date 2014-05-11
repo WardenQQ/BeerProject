@@ -9,7 +9,7 @@ public class Brasserie implements Serializable {
 
     private final int identifiant;
 
-    private String nom = "";
+    private StringBuffer nom = new StringBuffer();
     private LieuOrigine lieuOrigine = new LieuOrigine();
 
     public Brasserie() {
@@ -17,7 +17,7 @@ public class Brasserie implements Serializable {
         compteur++;
     }
 
-    public Brasserie(String nom, LieuOrigine lieuOrigine) {
+    public Brasserie(StringBuffer nom, LieuOrigine lieuOrigine) {
         this();
         this.nom = nom;
         this.lieuOrigine = lieuOrigine;
@@ -28,7 +28,7 @@ public class Brasserie implements Serializable {
 
         if (obj instanceof Brasserie) {
             Brasserie brasserie = (Brasserie)obj;
-            isEqual = this.nom.equals(brasserie.nom) &&
+            isEqual = this.nom.toString().equalsIgnoreCase(brasserie.nom.toString()) &&
                       this.lieuOrigine.equals(brasserie.lieuOrigine);
         }
 
@@ -37,10 +37,10 @@ public class Brasserie implements Serializable {
 
     public int getIdentifiant() { return identifiant;}
 
-    public String getNom() { return nom;}
-    public void setNom(String nom) {
+    public StringBuffer getNom() { return nom;}
+    public void setNom(StringBuffer nom) {
         if (nom == null) {
-            nom = new String();
+            nom = new StringBuffer();
         }
         this.nom = nom;
     }

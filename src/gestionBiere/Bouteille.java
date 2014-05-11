@@ -12,7 +12,7 @@ public class Bouteille implements Serializable {
     private int taille = 0;
     private StringBuffer type = new StringBuffer(); 
     private StringBuffer bouchon = new StringBuffer();
-    private String lienPhoto = ""; 
+    private StringBuffer lienPhoto = new StringBuffer(); 
     private Breuvage breuvage = new Breuvage(); 
 
     public Bouteille() {
@@ -20,7 +20,7 @@ public class Bouteille implements Serializable {
         compteur++;
     }
 
-    public Bouteille(int taille, StringBuffer type, StringBuffer bouchon, String lienPhoto, Breuvage breuvage) {
+    public Bouteille(int taille, StringBuffer type, StringBuffer bouchon, StringBuffer lienPhoto, Breuvage breuvage) {
         this();
         setBouchon(bouchon);
         setBreuvage(breuvage);
@@ -61,9 +61,9 @@ public class Bouteille implements Serializable {
         this.bouchon = bouchon;
     }
 
-    public void setLienPhoto(String lienPhoto) {
+    public void setLienPhoto(StringBuffer lienPhoto) {
         if (lienPhoto == null) {
-            lienPhoto = new String();
+            lienPhoto = new StringBuffer();
         }
         this.lienPhoto = lienPhoto;
     }
@@ -87,7 +87,7 @@ public class Bouteille implements Serializable {
         return this.type.toString();
     }
 
-    public String getLienPhoto() {
+    public StringBuffer getLienPhoto() {
         return this.lienPhoto;
     }
 

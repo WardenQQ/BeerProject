@@ -1,7 +1,6 @@
 package gestionBiere;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class Breuvage implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -10,7 +9,7 @@ public class Breuvage implements Serializable {
 
     private final int identifiant;
 
-    private String nom = "";
+    private StringBuffer nom = new StringBuffer();
     private Brasserie brasserie = new Brasserie();
     private LieuOrigine lieuOrigine = new LieuOrigine();
     private double tauxAlcool = 0.0;
@@ -19,15 +18,15 @@ public class Breuvage implements Serializable {
     private StringBuffer fermentation = new StringBuffer();
     private StringBuffer typeFermentation = new StringBuffer();
     private StringBuffer provenance = new StringBuffer();
-    private Commentaire commentaireDegustation = new Commentaire();
-    private Commentaire commentaireLibre = new Commentaire();
+    private StringBuffer commentaireDegustation = new StringBuffer();
+    private StringBuffer commentaireLibre = new StringBuffer();
     
     public Breuvage() {
         identifiant = compteur;
         compteur++;
     }
 
-    public Breuvage(String nom,
+    public Breuvage(StringBuffer nom,
             Brasserie brasserie,
             LieuOrigine lieuOrigine,
             double tauxAlcool,
@@ -36,8 +35,8 @@ public class Breuvage implements Serializable {
             StringBuffer fermentation,
             StringBuffer typeFermentation,
             StringBuffer provenance,
-            Commentaire commentaireDegustation,
-            Commentaire commentaireLibre) {
+            StringBuffer commentaireDegustation,
+            StringBuffer commentaireLibre) {
         this();
         setNom(nom);
         setBrasserie(brasserie);
@@ -70,10 +69,10 @@ public class Breuvage implements Serializable {
         return isEqual;
     }
 
-    public String getNom() { return nom; }
-    public void setNom(String nom) {
+    public StringBuffer getNom() { return nom; }
+    public void setNom(StringBuffer nom) {
         if (nom == null) {
-            nom = new String();
+            nom = new StringBuffer();
         }
         this.nom = nom;
     }
@@ -164,24 +163,24 @@ public class Breuvage implements Serializable {
         return identifiant;
     }
 
-    public Commentaire getCommentaireDegustation() {
+    public StringBuffer getCommentaireDegustation() {
         return commentaireDegustation;
     }
 
-    public void setCommentaireDegustation(Commentaire commentaireDegustation) {
+    public void setCommentaireDegustation(StringBuffer commentaireDegustation) {
         if (commentaireDegustation == null) {
-            commentaireDegustation = new Commentaire();
+            commentaireDegustation = new StringBuffer();
         }
         this.commentaireDegustation = commentaireDegustation;
     }
     
-    public Commentaire getCommentaireLibre() {
+    public StringBuffer getCommentaireLibre() {
         return commentaireLibre;
     }
 
-    public void setCommentaireLibre(Commentaire commentaireLibre) {
+    public void setCommentaireLibre(StringBuffer commentaireLibre) {
         if (commentaireLibre == null) {
-            commentaireLibre = new Commentaire();
+            commentaireLibre = new StringBuffer();
         }
         this.commentaireLibre = commentaireLibre;
     }

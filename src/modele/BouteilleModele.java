@@ -61,4 +61,23 @@ public class BouteilleModele extends AbstractTableModel
 
         fireTableRowsInserted(rowIndex, rowIndex);
     }
+    
+    public void setValueAt(Object aValue,int rowIndex, int columnIndex)
+    {
+    	if (aValue != null) {
+    		Bouteille listeBouteille = this.listeBouteille.get(rowIndex);
+    		
+    		switch(columnIndex)
+    		{		 
+    			case 2 : 
+    				listeBouteille.setTailleBouteille(((Integer)aValue).intValue());
+    				break;
+    			case 4 :
+    				listeBouteille.getLienPhoto().replace(0, listeBouteille.getLienPhoto().length(), (String)aValue);
+    				break;
+    			default :
+    				break;
+    		}
+    	}
+    }
 }

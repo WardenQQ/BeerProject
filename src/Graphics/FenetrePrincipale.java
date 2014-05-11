@@ -9,15 +9,20 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import javax.swing.DefaultCellEditor;
+import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.RowFilter;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+
 
 
 import modele.BouteilleModele;
@@ -179,7 +184,10 @@ public class FenetrePrincipale extends JFrame
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			
+			TableRowSorter<BreuvageModele> sorter = new TableRowSorter<BreuvageModele>();
+			sorter.setModel(breuvage);
+			String regex = JOptionPane.showInputDialog("Regex de filtre : ");	 
+	        sorter.setRowFilter(RowFilter.regexFilter(regex, 0, 1));		
 		}
 	}
 	
@@ -298,15 +306,4 @@ public class FenetrePrincipale extends JFrame
 		}
 	}
 	
-	public boolean isCellEditable(int rowIndex, int columnIndex) {
-	    return true; //Toutes les cellules éditables
-	}
-	
-	public class ColorCellEditor extends DefaultCellEditor
-	{
-		public ColorCellEditor()
-		{
-			super(new JComboBox(couleur.getTableModelListeners()));
-		}
-	}
 }

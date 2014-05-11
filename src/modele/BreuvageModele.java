@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
+import gestionBiere.Bouteille;
 import gestionBiere.Breuvage;
 import gestionBiere.LieuOrigine;
 
@@ -69,14 +70,49 @@ public class BreuvageModele extends AbstractTableModel implements Observer
             case 10:
                 return listeBreuvage.get(rowIndex).getProvenance();
             case 11:
-                return listeBreuvage.get(rowIndex).getCommentaireDegustation().getTexte();
+                return listeBreuvage.get(rowIndex).getCommentaireDegustation();
             case 12:
-                return listeBreuvage.get(rowIndex).getCommentaireLibre().getTexte();
+                return listeBreuvage.get(rowIndex).getCommentaireLibre();
             default:
                 return null;
         }
     }
 
+    /*public void setValueAt(Object aValue,int rowIndex, int columnIndex)
+    {
+    	if (aValue != null) {
+    		Breuvage listeBreuvage = this.listeBreuvage.get(rowIndex);
+    		
+    		switch (columnIndex) {
+            	case 1:
+            		listeBreuvage.getNom().replace(0, listeBreuvage.getNom().length(), (String)aValue);
+            case 2:
+                return listeBreuvage.get(rowIndex).getBrasserie().getNom();
+            case 3:
+                return listeBreuvage.get(rowIndex).getLieuOrigine().getNom();
+            case 4:
+                return listeBreuvage.get(rowIndex).getLieuOrigine().getPaysAppartenance();
+            case 5:
+                return listeBreuvage.get(rowIndex).getTauxAlcool();
+            case 6:
+                return listeBreuvage.get(rowIndex).getAnneeOrigine();
+            case 7:
+                return listeBreuvage.get(rowIndex).getCouleur();
+            case 8:
+                return listeBreuvage.get(rowIndex).getFermentation();
+            case 9:
+                return listeBreuvage.get(rowIndex).getTypeFermentation();
+            case 10:
+                return listeBreuvage.get(rowIndex).getProvenance();
+            case 11:
+                return listeBreuvage.get(rowIndex).getCommentaireDegustation();
+            case 12:
+                return listeBreuvage.get(rowIndex).getCommentaireLibre();
+            default:
+                break;
+    	}
+    }*/
+    
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return columnIndex > 0;
     }
