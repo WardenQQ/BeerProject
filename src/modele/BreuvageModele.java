@@ -75,4 +75,16 @@ public class BreuvageModele extends AbstractTableModel
                 return null;
         }
     }
+
+    public void ajoutBreuvage() {
+        listeBreuvage.add(new Breuvage());
+
+        fireTableRowsInserted(listeBreuvage.size() - 1, listeBreuvage.size() - 1);
+    }
+    
+    public void suppressionBreuvage(int rowIndex) {
+        listeBreuvage.remove(rowIndex);
+
+        fireTableRowsInserted(rowIndex, rowIndex);
+    }
 }

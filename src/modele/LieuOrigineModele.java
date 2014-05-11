@@ -41,4 +41,16 @@ public class LieuOrigineModele extends AbstractTableModel
                 return null;
         }
     }
+
+    public void ajoutLieuOrigine() {
+        listeLieuOrigine.add(new LieuOrigine());
+
+        fireTableRowsInserted(listeLieuOrigine.size() - 1, listeLieuOrigine.size() - 1);
+    }
+    
+    public void suppressionLieuOrigine(int rowIndex) {
+        listeLieuOrigine.remove(rowIndex);
+
+        fireTableRowsInserted(rowIndex, rowIndex);
+    }
 }

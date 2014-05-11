@@ -43,4 +43,16 @@ public class BrasserieModele extends AbstractTableModel
                 return null;
         }
     }
+
+    public void ajoutBrasserie() {
+        listeBrasserie.add(new Brasserie());
+
+        fireTableRowsInserted(listeBrasserie.size() - 1, listeBrasserie.size() - 1);
+    }
+    
+    public void suppressionBrasserie(int rowIndex) {
+        listeBrasserie.remove(rowIndex);
+
+        fireTableRowsInserted(rowIndex, rowIndex);
+    }
 }

@@ -45,4 +45,16 @@ public class BouteilleModele extends AbstractTableModel
                 return null;
         }
     }
+    
+    public void ajoutBouteille() {
+        listeBouteille.add(new Bouteille());
+
+        fireTableRowsInserted(listeBouteille.size() - 1, listeBouteille.size() - 1);
+    }
+    
+    public void suppressionBouteille(int rowIndex) {
+        listeBouteille.remove(rowIndex);
+
+        fireTableRowsInserted(rowIndex, rowIndex);
+    }
 }
