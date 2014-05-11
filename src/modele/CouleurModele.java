@@ -16,6 +16,7 @@ public class CouleurModele extends AbstractTableModel
     public CouleurModele(ArrayList<StringBuffer> listeCouleur) {
         super();
         this.listeCouleur = listeCouleur;
+        this.listeObserver = new ArrayList<Observer>;
     }
 
     public int getRowCount() {
@@ -71,7 +72,9 @@ public class CouleurModele extends AbstractTableModel
     }
 
     public void ajoutObserver(Observer observer) {
-        listeObserver.add(observer);
+        if (observer != null) {
+            listeObserver.add(observer);
+        }
     }
 
     private void notify(String string, Object obj) {
