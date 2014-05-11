@@ -41,7 +41,7 @@ public class FenetrePrincipale extends JFrame
 	private Dimension dimTab = new Dimension(1050,650);
 	private Dimension dimPanMenuLateral = new Dimension(170,600);
 	private Dimension dimPanRecherche = new Dimension(1000,40);
-	private Dimension dimRecherche = new Dimension(250,30);
+	private Dimension dimText = new Dimension(200,40);
 	private String nomFichier = "breuvage.bdd";
 	private BaseDonnee bdd = new BaseDonnee(nomFichier);
 	private String selectionActuelle = "Breuvage";
@@ -77,14 +77,15 @@ public class FenetrePrincipale extends JFrame
 		
 		JPanel menuLateral = new JPanel();
 		JPanel barreRecherche = new JPanel();
-		JLabel label = new JLabel("Recherche : ");
-		JButton okButton = new JButton ("OK");
+		JLabel label = new JLabel("Cliquez ici pour effectuer une recherche : ");
+		JButton okButton = new JButton ("Recherche");
 		JButton[] tabBoutons = new JButton[nomBoutons.length];
-		JTextField champRecherche = new JTextField("Tapez ici votre recherche");
 		
 		menuLateral.setPreferredSize(dimPanMenuLateral);
 		
 		barreRecherche.setPreferredSize(dimPanRecherche);
+		
+		label.setPreferredSize(dimText);
 		
 		choixListe.setPreferredSize(dimBouton);
 		choixListe.addActionListener(new choixAffichage());
@@ -92,8 +93,6 @@ public class FenetrePrincipale extends JFrame
 		affichage = new JTable(this.breuvage);
 		affichage.setAutoCreateRowSorter(true);
 		affichage.setPreferredSize(dimTab);
-		
-		champRecherche.setPreferredSize(dimRecherche);
 		
 		label.setPreferredSize(dimBouton);
 		
@@ -129,9 +128,7 @@ public class FenetrePrincipale extends JFrame
 		
 		JScrollPane sp = new JScrollPane(affichage);
 		sp.setPreferredSize(new Dimension(dimTab));
-		barreRecherche.add(label,BorderLayout.WEST);
-		barreRecherche.add(champRecherche,BorderLayout.WEST);
-		barreRecherche.add(okButton,BorderLayout.WEST);
+		barreRecherche.add(okButton,BorderLayout.CENTER);
 		
 		menu.add(barreRecherche, BorderLayout.NORTH);
 		menu.add(sp,BorderLayout.SOUTH);
@@ -186,7 +183,7 @@ public class FenetrePrincipale extends JFrame
 		{
 			TableRowSorter<BreuvageModele> sorter = new TableRowSorter<BreuvageModele>();
 			sorter.setModel(breuvage);
-			String regex = JOptionPane.showInputDialog("Regex de filtre : ");	 
+			String regex = JOptionPane.showInputDialog("Recherche dans la base : ");	 
 	        sorter.setRowFilter(RowFilter.regexFilter(regex, 0, 1));		
 		}
 	}
