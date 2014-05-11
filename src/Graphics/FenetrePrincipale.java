@@ -71,6 +71,16 @@ public class FenetrePrincipale extends JFrame
 		this.setVisible(true);
                 
                 couleur.ajoutObserver(breuvage);
+                fermentation.ajoutObserver(breuvage);
+                typeF.ajoutObserver(breuvage);
+                provenance.ajoutObserver(breuvage);
+                lieuOrigine.ajoutObserver(breuvage);
+
+                lieuOrigine.ajoutObserver(brasserie);
+
+                bouchon.ajoutObserver(bouteille);
+                typeB.ajoutObserver(bouteille);
+                breuvage.ajoutObserver(bouteille);
 	}
 	
 	private void initInterfaceGraphique()

@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
 import gestionBiere.Bouteille;
+import gestionBiere.Breuvage;
+import gestionBiere.Brasserie;
 
-public class BouteilleModele extends AbstractTableModel 
+public class BouteilleModele extends AbstractTableModel implements Observer
 {
     private static final long serialVersionUID = 1L;
     private final String[] entete = {"Nom breuvage", "Type de bouteille", "Taille", "Type de bouchon", "lienPhoto"};
@@ -80,5 +82,30 @@ public class BouteilleModele extends AbstractTableModel
     				break;
     		}
     	}
+    }
+
+    public void notify(String string, Object obj) {
+        if (string.equals("Breuvage")) {
+            for (Bouteille ite : listeBouteille) {
+                if (ite.getBreuvage() == obj) {
+                    ite.setBreuvage(new Breuvage());
+                    break;
+                }
+            }
+        } else if (string.equals("TypeBouteille")) {
+            for (Bouteille ite : listeBouteille) {
+                if (ite.getType() == obj) {
+                    ite.setType(new StringBuffer());
+                    break;
+                }
+            }
+        } else if (string.equals("Bouchon")) {
+            for (Bouteille ite : listeBouteille) {
+                if (ite.getBouchon() == obj) {
+                    ite.setBouchon(new StringBuffer());
+                    break;
+                }
+            }
+        }
     }
 }

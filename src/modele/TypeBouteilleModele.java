@@ -7,12 +7,16 @@ import javax.swing.table.AbstractTableModel;
 public class TypeBouteilleModele extends AbstractTableModel 
 {
     private static final long serialVersionUID = 1L;
+
     private final String[] entete = { "TypeBouteille" };
+
     private ArrayList<StringBuffer> listeTypeBouteille;
+    ArrayList<Observer> listeObserver;
 
     public TypeBouteilleModele(ArrayList<StringBuffer> listeTypeBouteille) {
         super();
         this.listeTypeBouteille = listeTypeBouteille;
+        this.listeObserver = new ArrayList<Observer>();
     }
 
     public int getRowCount() {
@@ -58,10 +62,24 @@ public class TypeBouteilleModele extends AbstractTableModel
 
         fireTableRowsInserted(listeTypeBouteille.size() - 1, listeTypeBouteille.size() - 1);
     }
-    
+
     public void suppressionTypeBouteille(int rowIndex) {
-        listeTypeBouteille.remove(rowIndex);
+        Object objSupprimer = listeTypeBouteille.remove(rowIndex);
 
         fireTableRowsInserted(rowIndex, rowIndex);
+
+        notify("TypeBouteille", objSupprimer);
+    }
+
+    public void ajoutObserver(Observer observer) {
+        if (observer != null) {
+            listeObserver.add(observer);
+        }
+    }
+
+    private void notify(String string, Object obj) {
+        for (Observer ite : listeObserver) {
+            ite.notify(string, obj);
+        }
     }
 }

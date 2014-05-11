@@ -5,16 +5,20 @@ import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
 import gestionBiere.Brasserie;
+import gestionBiere.LieuOrigine;
 
-public class BrasserieModele extends AbstractTableModel 
-{
+public class BrasserieModele extends AbstractTableModel implements Observer {
     private static final long serialVersionUID = 1L;
+
     private final String[] entete = {"Identifiant", "Nom de la Brasserie", "Ville d'origine", "Pays d'origine"};
+
     private ArrayList<Brasserie> listeBrasserie;
+    ArrayList<Observer> listeObserver;
 
     public BrasserieModele(ArrayList<Brasserie> listeBrasserie) {
         super();
         this.listeBrasserie = listeBrasserie;
+        this.listeObserver = new ArrayList<Observer>();
     }
 
     public int getRowCount() {
@@ -55,9 +59,34 @@ public class BrasserieModele extends AbstractTableModel
     }
     
     public void suppressionBrasserie(int rowIndex) {
-        listeBrasserie.remove(rowIndex);
+        Object objSupprimer = listeBrasserie.remove(rowIndex);
 
         fireTableRowsInserted(rowIndex, rowIndex);
+
+        notifyObserver("Brasserie", objSupprimer);
+    }
+
+    public void ajoutObserver(Observer observer) {
+        if (observer != null) {
+            listeObserver.add(observer);
+        }
+    }
+
+    private void notifyObserver(String string, Object obj) {
+        for (Observer ite : listeObserver) {
+            ite.notify(string, obj);
+        }
+    }
+
+    public void notify(String string, Object obj) {
+        if (string.equals("LieuOrigine")) {
+            for (Brasserie ite : listeBrasserie) {
+                if (ite.getLieuOrigine() == obj) {
+                    ite.setLieuOrigine(new LieuOrigine());
+                    break;
+                }
+            }
+        }
     }
     
     public void setValueAt(Object aValue,int rowIndex, int columnIndex)

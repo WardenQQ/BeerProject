@@ -7,12 +7,16 @@ import javax.swing.table.AbstractTableModel;
 public class ProvenanceModele extends AbstractTableModel 
 {
     private static final long serialVersionUID = 1L;
+
     private final String[] entete = { "Provenance" };
+
     private ArrayList<StringBuffer> listeProvenance;
+    ArrayList<Observer> listeObserver;
 
     public ProvenanceModele(ArrayList<StringBuffer> listeProvenance) {
         super();
         this.listeProvenance = listeProvenance;
+        this.listeObserver = new ArrayList<Observer>();
     }
 
     public int getRowCount() {
@@ -60,8 +64,22 @@ public class ProvenanceModele extends AbstractTableModel
     }
     
     public void suppressionProvenance(int rowIndex) {
-        listeProvenance.remove(rowIndex);
+        Object objSupprimer = listeProvenance.remove(rowIndex);
 
         fireTableRowsInserted(rowIndex, rowIndex);
+
+        notify("Provenance", objSupprimer);
+    }
+
+    public void ajoutObserver(Observer observer) {
+        if (observer != null) {
+            listeObserver.add(observer);
+        }
+    }
+
+    private void notify(String string, Object obj) {
+        for (Observer ite : listeObserver) {
+            ite.notify(string, obj);
+        }
     }
 }
