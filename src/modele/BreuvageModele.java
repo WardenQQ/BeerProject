@@ -31,6 +31,7 @@ public class BreuvageModele extends AbstractTableModel implements Observer
     private ArrayList<Breuvage> listeBreuvage;
     ArrayList<Observer> listeObserver;
 
+    
     public BreuvageModele(ArrayList<Breuvage> listeBreuvage) {
         super();
         this.listeBreuvage = listeBreuvage;
@@ -93,10 +94,10 @@ public class BreuvageModele extends AbstractTableModel implements Observer
     						(String)aValue);
             		break;
             	case 5 :
-            		listeBreuvage.setTauxAlcool(((Integer)aValue).intValue());
+            		listeBreuvage.setTauxAlcool(((Double.parseDouble((String)aValue))));
             		break;
             	case 6 :
-            		listeBreuvage.setAnneeOrigine(((Integer)aValue).intValue());
+            		listeBreuvage.setAnneeOrigine(((Integer.parseInt((String)aValue))));
             		break;
             	case 11 :
             		listeBreuvage.getCommentaireDegustation().replace(0,

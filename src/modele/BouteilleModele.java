@@ -6,7 +6,6 @@ import javax.swing.table.AbstractTableModel;
 
 import gestionBiere.Bouteille;
 import gestionBiere.Breuvage;
-import gestionBiere.Brasserie;
 
 public class BouteilleModele extends AbstractTableModel implements Observer
 {
