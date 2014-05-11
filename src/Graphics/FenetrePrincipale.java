@@ -1,17 +1,15 @@
 package Graphics;
 
-import gestionBiere.*;
+import modele.*;
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
+import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -20,7 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.table.AbstractTableModel;
+
 
 import modele.BouteilleModele;
 
@@ -29,57 +27,47 @@ import bdd.BaseDonnee;
 public class FenetrePrincipale extends JFrame
 {
 	private static final long serialVersionUID = 1L;
-	private JPanel interfaceGraphique = new JPanel();
 	private JPanel menu = new JPanel();
-	private JPanel menuAjout = new JPanel();
 	private JTable affichage = new JTable();
 	private String[] nomBoutons = {"Ajout","Suppression","Sauvegarder","Quitter"};
-	private String[] choixMenu = {"Breuvage","Bouteille","Brasserie","Lieu origine","Commentaire"}; 
-	private Dimension dimFormulaire = new Dimension(400,500);
+	private String[] choixMenu = {"Breuvage","Bouteille","Brasserie","Lieu origine","Couleur",
+			"Fermentation","Provenance","Type Bouteille","Type Fermentation","Bouchon"}; 
 	private Dimension dimBouton = new Dimension(130,40);
-	private Dimension dimTab = new Dimension(900,600);
-	private Dimension dimPanMenuLateral = new Dimension(140,600);
-	private Dimension dimPanRecherche = new Dimension(900,40);
+	private Dimension dimTab = new Dimension(1050,650);
+	private Dimension dimPanMenuLateral = new Dimension(170,600);
+	private Dimension dimPanRecherche = new Dimension(1000,40);
 	private Dimension dimRecherche = new Dimension(250,30);
 	private String nomFichier = "breuvage.bdd";
 	private BaseDonnee bdd = new BaseDonnee(nomFichier);
 	private String selectionActuelle = "Breuvage";
-	private CardLayout layout = new CardLayout();
-	private String[] listePanel = {"Principal", "Ajout", "Modification"};
 	private JComboBox choixListe = initComboBox(choixMenu);
-	private breuvageModele breuvage = new breuvageModele();
-	private brasserieModele brasserie = new brasserieModele();
-	private LieuOrigineModele lieuOrigine = new LieuOrigineModele();
+	private BreuvageModele breuvage = new BreuvageModele(bdd.getListeBreuvage());
+	private BrasserieModele brasserie = new BrasserieModele(bdd.getListeBrasserie());
+	private LieuOrigineModele lieuOrigine = new LieuOrigineModele(bdd.getListeLieuOrigine());
+	private CouleurModele couleur = new CouleurModele(bdd.getListeCouleur());
+	private FermentationModele fermentation = new FermentationModele(bdd.getListeFermentation());
+	private TypeBouteilleModele typeB = new TypeBouteilleModele(bdd.getListeTypeFermentation());
+	private ProvenanceModele provenance = new ProvenanceModele(bdd.getListeProvenance());
+	private TypeFermentationModele typeF = new TypeFermentationModele(bdd.getListeTypeFermentation());
 	private BouteilleModele bouteille = new BouteilleModele(bdd.getListeBouteille());
-	private enum Choix {
-	    Breuvage;
-	}
+	private BouchonModele bouchon = new BouchonModele(bdd.getListeBouchon());
 	
 	public FenetrePrincipale()
 	{
 		// Initialisation de la Fenetre
 		this.setTitle("Gestion de base de données de Bières");
-		this.setSize(1080,720);
+		this.setSize(1280,800);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
 		
-		initInterface();
+		initInterfaceGraphique();
 		
-		this.setContentPane(interfaceGraphique);
+		this.setContentPane(menu);
 		this.setVisible(true);
 	}
 	
-	private void initInterface()
-	{
-		initPagePrincipale();
-		initPageAjout();
-		interfaceGraphique.setLayout(layout);
-		interfaceGraphique.add(menu, listePanel[0]);
-		interfaceGraphique.add(menuAjout, listePanel[1]);
-	}
-	
-	private void initPagePrincipale()
+	private void initInterfaceGraphique()
 	{
 		
 		JPanel menuLateral = new JPanel();
@@ -122,12 +110,13 @@ public class FenetrePrincipale extends JFrame
 					menuLateral.add(tabBoutons[i]);
 					break;
 				case 2 :
-					tabBoutons[i].addActionListener(new boutonQuitter());
+					tabBoutons[i].addActionListener(new boutonSave());
 					menuLateral.add(tabBoutons[i]);
 					break;
 				case 3 :
 					tabBoutons[i].addActionListener(new boutonQuitter());
 					menuLateral.add(tabBoutons[i]);
+					break;
 				default :
 					break;
 			}
@@ -144,54 +133,6 @@ public class FenetrePrincipale extends JFrame
 		menu.add(menuLateral, BorderLayout.EAST);
 	}
 	
-	private void initPageAjout()
-	{
-		JPanel formulaire = new JPanel();
-		JPanel panBouton = new JPanel();
-		GridLayout gl = new GridLayout(10,1);
-		formulaire.setPreferredSize(dimFormulaire);
-		formulaire.setLayout(gl);
-		panBouton.setPreferredSize(dimPanRecherche);
-		Choix choix = Choix.valueOf(selectionActuelle); // surround with try/catch
-		switch(choix)
-		{
-		case Breuvage :
-			JLabel labelNom = new JLabel("Nom :");
-			JTextField champNom = new JTextField("Nom");
-			JLabel labelTaux = new JLabel("Taux D'alcool : ");
-			JTextField champTaux = new JTextField("TauxAlcool");
-			JLabel labelAnnee = new JLabel("Annee Origine : ");
-			JTextField champAnnee = new JTextField("Annee Origine");
-			JComboBox choixFermentation = initComboBoxBuffer(bdd.getListeFermentation());
-			JComboBox choixTypeFermentation = initComboBoxBuffer(bdd.getListeTypeFermentation());
-			JComboBox choixProvenance = initComboBoxBuffer(bdd.getListeProvenance());
-			JComboBox choixCouleur = initComboBoxBuffer(bdd.getListeCouleur());
-			formulaire.add(labelNom);
-			formulaire.add(champNom);
-			formulaire.add(labelTaux);
-			formulaire.add(champTaux);
-			formulaire.add(labelAnnee);
-			formulaire.add(champAnnee);
-			formulaire.add(choixFermentation);
-			formulaire.add(choixTypeFermentation);
-			formulaire.add(choixProvenance);
-			formulaire.add(choixCouleur);
-			
-			JButton ajoutButton = new JButton("Ajouter");
-			JButton cancelButton = new JButton("Annuler");
-			cancelButton.addActionListener(new boutonAjoutCancel());
-			ajoutButton.addActionListener(new boutonAjoutOk());
-			panBouton.add(ajoutButton);
-			panBouton.add(cancelButton);
-			break;
-		default :
-			break;
-		}
-		menuAjout.add(formulaire, BorderLayout.NORTH);
-		menuAjout.add(panBouton, BorderLayout.SOUTH);
-	}
-	
-	
 	private JComboBox initComboBox(String[] choix)
 	{
 		JComboBox choixBox = new JComboBox();
@@ -202,6 +143,7 @@ public class FenetrePrincipale extends JFrame
 		return choixBox;
 	}
 	
+	@SuppressWarnings("unused")
 	private JComboBox initComboBoxBuffer(ArrayList<StringBuffer> aL)
 	{
 		JComboBox choixBox = new JComboBox();
@@ -216,11 +158,11 @@ public class FenetrePrincipale extends JFrame
 		return choixBox;
 	}
 	
-	class boutonCancel implements ActionListener
+	class boutonSave implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			layout.show(interfaceGraphique, listePanel[0]);
+			bdd.sauvegarder(nomFichier);
 		}
 	}
 	
@@ -228,6 +170,7 @@ public class FenetrePrincipale extends JFrame
 	{
 		public void actionPerformed(ActionEvent e)
 		{
+			bdd.sauvegarder(nomFichier);
 			dispose();
 		}
 	}
@@ -236,7 +179,7 @@ public class FenetrePrincipale extends JFrame
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			dispose();
+			
 		}
 	}
 	
@@ -244,23 +187,8 @@ public class FenetrePrincipale extends JFrame
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			
-		}
-	}
-	
-	class boutonAjoutCancel implements ActionListener
-	{
-		public void actionPerformed(ActionEvent e)
-		{
-			layout.show(interfaceGraphique, listePanel[0]);
-		}
-	}
-	
-	class boutonAjoutOk implements ActionListener
-	{
-		public void actionPerformed(ActionEvent e)
-		{
-			
+			int aSupprimer = affichage.getSelectedRow();
+			couleur.suppressionCouleur(aSupprimer);
 		}
 	}
 	
@@ -268,7 +196,47 @@ public class FenetrePrincipale extends JFrame
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			layout.show(interfaceGraphique, listePanel[1]);
+			selectionActuelle = choixListe.getSelectedItem().toString();
+			if (selectionActuelle.compareTo("Brasserie") == 0)
+			{
+				brasserie.ajoutBrasserie();
+			}
+			else if (selectionActuelle.compareTo("Breuvage") == 0)
+			{
+				breuvage.ajoutBreuvage();
+			}
+			else if (selectionActuelle.compareTo("Lieu origine") == 0)
+			{
+				lieuOrigine.ajoutLieuOrigine();
+			}
+			else if (selectionActuelle.compareTo("Fermentation") == 0)
+			{
+				fermentation.ajoutFermentation();
+			}
+			else if (selectionActuelle.compareTo("Bouteille") == 0)
+			{
+				bouteille.ajoutBouteille();
+			}
+			else if (selectionActuelle.compareTo("Type Bouteille") == 0)
+			{
+				typeB.ajoutTypeBouteille();
+			}
+			else if (selectionActuelle.compareTo("Type Fermentation") == 0)
+			{
+				typeF.ajoutTypeFermentation();
+			}
+			else if (selectionActuelle.compareTo("Provenance") == 0)
+			{
+				provenance.ajoutProvenance();
+			}
+			else if (selectionActuelle.compareTo("Couleur") == 0)
+			{
+				couleur.ajoutCouleur();
+			}
+			else if (selectionActuelle.compareTo("Bouchon") == 0)
+			{
+				bouchon.ajoutBouchon();
+			}
 		}
 	}
 	
@@ -292,195 +260,53 @@ public class FenetrePrincipale extends JFrame
 				affichage.setModel(lieuOrigine);
 				affichage.repaint();
 			}
-			else if (selectionActuelle.compareTo("Commentaire") == 0)
+			else if (selectionActuelle.compareTo("Fermentation") == 0)
 			{
-				
+				affichage.setModel(fermentation);
+				affichage.repaint();
 			}
 			else if (selectionActuelle.compareTo("Bouteille") == 0)
 			{
 				affichage.setModel(bouteille);
 				affichage.repaint();
 			}
+			else if (selectionActuelle.compareTo("Type Bouteille") == 0)
+			{
+				affichage.setModel(typeB);
+				affichage.repaint();
+			}
+			else if (selectionActuelle.compareTo("Type Fermentation") == 0)
+			{
+				affichage.setModel(typeF);
+				affichage.repaint();
+			}
+			else if (selectionActuelle.compareTo("Provenance") == 0)
+			{
+				affichage.setModel(provenance);
+				affichage.repaint();
+			}
+			else if (selectionActuelle.compareTo("Couleur") == 0)
+			{
+				affichage.setModel(couleur);
+				affichage.repaint();
+			}
+			else if (selectionActuelle.compareTo("Bouchon") == 0)
+			{
+				affichage.setModel(bouchon);
+				affichage.repaint();
+			}
 		}
 	}
 	
-	class breuvageModele extends AbstractTableModel
-	{
-		/**
-		 * 
-		 */
-		private String[] enteteBreuvage = {"Id", "Nom", "Nom Brasserie", "Couleur"
-				,"Fermentation","Provenance","Lieu d'origine","Pays d'origine"};
-		private static final long serialVersionUID = 1L;
-		private final List<Breuvage> breuvage = new ArrayList<Breuvage>();
-		
-		public breuvageModele()
-		{
-			super();
-			breuvage.addAll(bdd.getListeBreuvage());
-		}
-		
-		public int getRowCount() 
-		{
-	        return breuvage.size();
-	    }
-		
-		public int getColumnCount()
-		{
-	        return enteteBreuvage.length;
-	    }
-		
-		public String getColumnName(int columnIndex) 
-		{
-	        return enteteBreuvage[columnIndex];
-	    }
-		
-		public Object getValueAt(int rowIndex, int columnIndex) 
-		{
-	        switch(columnIndex){
-	            case 0:
-	                return breuvage.get(rowIndex).getIdentifiant();
-	            case 1:
-	                return breuvage.get(rowIndex).getNom();
-	            case 2:
-	                return breuvage.get(rowIndex).getBrasserie().getNom();
-	            case 3:
-	                return breuvage.get(rowIndex).getCouleur();
-	            case 4:
-	                return breuvage.get(rowIndex).getFermentation();
-	            case 5:
-	                return breuvage.get(rowIndex).getProvenance();
-	            case 6:
-	                return breuvage.get(rowIndex).getLieuOrigine().getNom();
-	            case 7:
-	                return breuvage.get(rowIndex).getLieuOrigine().getPaysAppartenance();
-	            default:
-	                return null; 
-	        }
-	    }
-		public void addBreuvage(Breuvage newB) 
-		{
-	        breuvage.add(newB);
-	 
-	        fireTableRowsInserted(breuvage.size() -1, breuvage.size() -1);
-	    }
-		public void removeAmi(int rowIndex) {
-	        breuvage.remove(rowIndex);
-	 
-	        fireTableRowsDeleted(rowIndex, rowIndex);
-	    }
+	public boolean isCellEditable(int rowIndex, int columnIndex) {
+	    return true; //Toutes les cellules éditables
 	}
 	
-	class brasserieModele extends AbstractTableModel
+	public class ColorCellEditor extends DefaultCellEditor
 	{
-		/**
-		 * 
-		 */
-		private String[] enteteBrasserie = {"Id","Nom","Nom Brasserie"};
-		private static final long serialVersionUID = 1L;
-		private final List<Brasserie> brasserie = new ArrayList<Brasserie>();
-		
-		public brasserieModele()
+		public ColorCellEditor()
 		{
-			super();
-			brasserie.addAll(bdd.getListeBrasserie());
+			super(new JComboBox(couleur.getTableModelListeners()));
 		}
-		
-		public int getRowCount() 
-		{
-	        return brasserie.size();
-	    }
-		
-		public int getColumnCount() 
-		{
-	        return enteteBrasserie.length;
-	    }
-		
-		public String getColumnName(int columnIndex) 
-		{
-	        return enteteBrasserie[columnIndex];
-	    }
-		
-		public Object getValueAt(int rowIndex, int columnIndex) 
-		{
-	        switch(columnIndex){
-	            case 0:
-	                return brasserie.get(rowIndex).getIdentifiant();
-	            case 1:
-	                return brasserie.get(rowIndex).getNom();
-	            case 2:
-	                return brasserie.get(rowIndex).getLieuOrigine().getNom();
-	            case 3:
-	                return brasserie.get(rowIndex).getLieuOrigine().getPaysAppartenance();
-	            default:
-	                return null; 
-	        }
-	    }
-		public void addBrasserie(Brasserie newB) 
-		{
-	        brasserie.add(newB);
-	 
-	        fireTableRowsInserted(brasserie.size() -1, brasserie.size() -1);
-	    }
-		public void removeBrasserie(int rowIndex) {
-	        brasserie.remove(rowIndex);
-	 
-	        fireTableRowsDeleted(rowIndex, rowIndex);
-	    }
-	}
-	
-	class LieuOrigineModele extends AbstractTableModel
-	{
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-		private final List<LieuOrigine> lieuOrigine = new ArrayList<LieuOrigine>();
-		private String[] enteteLieuOrigine = {"Nom","Pays appartenance"};
-		
-		public LieuOrigineModele()
-		{
-			super();
-			lieuOrigine.addAll(bdd.getListeLieuOrigine());
-		}
-		
-		public int getRowCount() 
-		{
-	        return lieuOrigine.size();
-	    }
-		
-		public int getColumnCount() 
-		{
-	        return enteteLieuOrigine.length;
-	    }
-		
-		public String getColumnName(int columnIndex) 
-		{
-	        return enteteLieuOrigine[columnIndex];
-	    }
-		
-		public Object getValueAt(int rowIndex, int columnIndex) 
-		{
-	        switch(columnIndex){
-	            case 0:
-	                return lieuOrigine.get(rowIndex).getNom();
-	            case 1:
-	                return lieuOrigine.get(rowIndex).getPaysAppartenance();
-	            default:
-	                return null; 
-	        }
-	    }
-		public void addLieuOrigine(LieuOrigine newB) 
-		{
-	        lieuOrigine.add(newB);
-	 
-	        fireTableRowsInserted(lieuOrigine.size() -1, lieuOrigine.size() -1);
-	    }
-		public void removeLieuOrigine(int rowIndex) 
-		{
-			lieuOrigine.remove(rowIndex);
-	 
-	        fireTableRowsDeleted(rowIndex, rowIndex);
-	    }
 	}
 }
