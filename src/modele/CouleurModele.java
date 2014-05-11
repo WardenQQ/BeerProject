@@ -7,8 +7,11 @@ import javax.swing.table.AbstractTableModel;
 public class CouleurModele extends AbstractTableModel 
 {
     private static final long serialVersionUID = 1L;
+
     private final String[] entete = { "Couleur" };
+
     private ArrayList<StringBuffer> listeCouleur;
+    ArrayList<Observer> listeObserver;
 
     public CouleurModele(ArrayList<StringBuffer> listeCouleur) {
         super();
@@ -60,8 +63,20 @@ public class CouleurModele extends AbstractTableModel
     }
     
     public void suppressionCouleur(int rowIndex) {
-        listeCouleur.remove(rowIndex);
+        Object objSupprimer = listeCouleur.remove(rowIndex);
 
         fireTableRowsInserted(rowIndex, rowIndex);
+
+        notify("Couleur", objSupprimer);
+    }
+
+    public void ajoutObserver(Observer observer) {
+        listeObserver.add(observer);
+    }
+
+    private void notify(String string, Object obj) {
+        for (Observer ite : listeObserver) {
+            ite.notify(string, obj);
+        }
     }
 }

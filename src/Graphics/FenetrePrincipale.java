@@ -70,6 +70,8 @@ public class FenetrePrincipale extends JFrame
 		
 		this.setContentPane(menu);
 		this.setVisible(true);
+                
+                couleur.ajoutObserver(breuvage);
 	}
 	
 	private void initInterfaceGraphique()
