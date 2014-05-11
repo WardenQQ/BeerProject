@@ -9,7 +9,7 @@ import gestionBiere.LieuOrigine;
 public class LieuOrigineModele extends AbstractTableModel 
 {
     private static final long serialVersionUID = 1L;
-    private final String[] entete = { "Identifiant", "Ville d'origine", "Pays d'origine", };
+    private final String[] entete = { "Identifiant", "Ville d'origine", "Pays d'origine" };
     private ArrayList<LieuOrigine> listeLieuOrigine;
 
     public LieuOrigineModele(ArrayList<LieuOrigine> listeLieuOrigine) {

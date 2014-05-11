@@ -9,7 +9,7 @@ import gestionBiere.Bouteille;
 public class BouteilleModele extends AbstractTableModel 
 {
     private static final long serialVersionUID = 1L;
-    private final String[] entete = {"Nom breuvage", "Type", "Taille", "Type bouchon", "lienPhoto"};
+    private final String[] entete = {"Nom breuvage", "Type de bouteille", "Taille", "Type de bouchon", "lienPhoto"};
     private ArrayList<Bouteille> listeBouteille;
 
     public BouteilleModele(ArrayList<Bouteille> listeBouteille) {
