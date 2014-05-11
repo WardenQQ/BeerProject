@@ -5,10 +5,9 @@ import gestionBiere.*;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -23,6 +22,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.AbstractTableModel;
 
+import modele.BouteilleModele;
+
 import bdd.BaseDonnee;
 
 public class FenetrePrincipale extends JFrame
@@ -31,13 +32,9 @@ public class FenetrePrincipale extends JFrame
 	private JPanel interfaceGraphique = new JPanel();
 	private JPanel menu = new JPanel();
 	private JPanel menuAjout = new JPanel();
-	private JPanel menuSupr = new JPanel();
 	private JTable affichage = new JTable();
-	private String[] nomBoutons = {"Ajout","Suppression","Quitter"};
-	private String[] choixMenu = {"Breuvage","Bouteille","Brasserie","Lieu origine","Commentaire"};
-	private String[] enteteBreuvage = {"Id", "Nom", "Nom Brasserie", "Couleur"
-			,"Fermentation","Provenance","Lieu d'origine","Pays d'origine"}; 
-	private String[] enteteBrasserie = {"Id","Nom","Nom Brasserie"};
+	private String[] nomBoutons = {"Ajout","Suppression","Sauvegarder","Quitter"};
+	private String[] choixMenu = {"Breuvage","Bouteille","Brasserie","Lieu origine","Commentaire"}; 
 	private Dimension dimFormulaire = new Dimension(400,500);
 	private Dimension dimBouton = new Dimension(130,40);
 	private Dimension dimTab = new Dimension(900,600);
@@ -52,6 +49,8 @@ public class FenetrePrincipale extends JFrame
 	private JComboBox choixListe = initComboBox(choixMenu);
 	private breuvageModele breuvage = new breuvageModele();
 	private brasserieModele brasserie = new brasserieModele();
+	private LieuOrigineModele lieuOrigine = new LieuOrigineModele();
+	private BouteilleModele bouteille = new BouteilleModele(bdd.getListeBouteille());
 	private enum Choix {
 	    Breuvage;
 	}
@@ -78,7 +77,6 @@ public class FenetrePrincipale extends JFrame
 		interfaceGraphique.setLayout(layout);
 		interfaceGraphique.add(menu, listePanel[0]);
 		interfaceGraphique.add(menuAjout, listePanel[1]);
-		interfaceGraphique.add(menuSupr, listePanel[2]);
 	}
 	
 	private void initPagePrincipale()
@@ -120,13 +118,16 @@ public class FenetrePrincipale extends JFrame
 					menuLateral.add(tabBoutons[i]);
 					break;
 				case 1 :
-					tabBoutons[i].addActionListener(new boutonModif());
+					tabBoutons[i].addActionListener(new boutonSupr());
 					menuLateral.add(tabBoutons[i]);
 					break;
 				case 2 :
 					tabBoutons[i].addActionListener(new boutonQuitter());
 					menuLateral.add(tabBoutons[i]);
 					break;
+				case 3 :
+					tabBoutons[i].addActionListener(new boutonQuitter());
+					menuLateral.add(tabBoutons[i]);
 				default :
 					break;
 			}
@@ -147,8 +148,9 @@ public class FenetrePrincipale extends JFrame
 	{
 		JPanel formulaire = new JPanel();
 		JPanel panBouton = new JPanel();
-		
+		GridLayout gl = new GridLayout(10,1);
 		formulaire.setPreferredSize(dimFormulaire);
+		formulaire.setLayout(gl);
 		panBouton.setPreferredSize(dimPanRecherche);
 		Choix choix = Choix.valueOf(selectionActuelle); // surround with try/catch
 		switch(choix)
@@ -160,20 +162,20 @@ public class FenetrePrincipale extends JFrame
 			JTextField champTaux = new JTextField("TauxAlcool");
 			JLabel labelAnnee = new JLabel("Annee Origine : ");
 			JTextField champAnnee = new JTextField("Annee Origine");
-			//JComboBox choixFermentation = initComboBox((String[]) bdd.getListeFermentation().toArray());
-			//JComboBox choixTypeFermentation = initComboBox((String[]) bdd.getListeTypeFermentation().toArray());
-			//JComboBox choixProvenance = initComboBox((String[])bdd.getListeProvenance().toArray());
-			//JComboBox choixCouleur = initComboBox((String[]) bdd.getListeCouleur().toArray());
+			JComboBox choixFermentation = initComboBoxBuffer(bdd.getListeFermentation());
+			JComboBox choixTypeFermentation = initComboBoxBuffer(bdd.getListeTypeFermentation());
+			JComboBox choixProvenance = initComboBoxBuffer(bdd.getListeProvenance());
+			JComboBox choixCouleur = initComboBoxBuffer(bdd.getListeCouleur());
 			formulaire.add(labelNom);
 			formulaire.add(champNom);
 			formulaire.add(labelTaux);
 			formulaire.add(champTaux);
 			formulaire.add(labelAnnee);
 			formulaire.add(champAnnee);
-			//formulaire.add(choixFermentation);
-			//formulaire.add(choixTypeFermentation);
-			//formulaire.add(choixProvenance);
-			//formulaire.add(choixCouleur);
+			formulaire.add(choixFermentation);
+			formulaire.add(choixTypeFermentation);
+			formulaire.add(choixProvenance);
+			formulaire.add(choixCouleur);
 			
 			JButton ajoutButton = new JButton("Ajouter");
 			JButton cancelButton = new JButton("Annuler");
@@ -185,14 +187,10 @@ public class FenetrePrincipale extends JFrame
 		default :
 			break;
 		}
-		menuAjout.add(panBouton, BorderLayout.NORTH);
-		menuAjout.add(formulaire, BorderLayout.SOUTH);
+		menuAjout.add(formulaire, BorderLayout.NORTH);
+		menuAjout.add(panBouton, BorderLayout.SOUTH);
 	}
 	
-	private void initPageModif()
-	{
-		
-	}
 	
 	private JComboBox initComboBox(String[] choix)
 	{
@@ -201,6 +199,20 @@ public class FenetrePrincipale extends JFrame
 		{
 			choixBox.addItem(choix[i]);
 		}
+		return choixBox;
+	}
+	
+	private JComboBox initComboBoxBuffer(ArrayList<StringBuffer> aL)
+	{
+		JComboBox choixBox = new JComboBox();
+		Iterator<StringBuffer> ite = aL.iterator();
+		StringBuffer elem = null;
+		for(;ite.hasNext();)
+		{
+			elem = ite.next();
+			choixBox.addItem(elem);
+		}
+		choixBox.addItem("Inconnu");
 		return choixBox;
 	}
 	
@@ -220,19 +232,19 @@ public class FenetrePrincipale extends JFrame
 		}
 	}
 	
-	class boutonModif implements ActionListener
-	{
-		public void actionPerformed(ActionEvent e)
-		{
-			
-		}
-	}
-	
 	class boutonRech implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
 		{
 			dispose();
+		}
+	}
+	
+	class boutonSupr implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+			
 		}
 	}
 	
@@ -248,11 +260,7 @@ public class FenetrePrincipale extends JFrame
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			if (selectionActuelle.compareTo("Breuvage") == 0)
-			{
-				Breuvage newB = new Breuvage();
-				breuvage.addBreuvage(newB);
-			}
+			
 		}
 	}
 	
@@ -279,9 +287,19 @@ public class FenetrePrincipale extends JFrame
 				affichage.setModel(breuvage);
 				affichage.repaint();
 			}
-			else if (selectionActuelle.compareTo("LieuOrigine") == 0)
+			else if (selectionActuelle.compareTo("Lieu origine") == 0)
+			{
+				affichage.setModel(lieuOrigine);
+				affichage.repaint();
+			}
+			else if (selectionActuelle.compareTo("Commentaire") == 0)
 			{
 				
+			}
+			else if (selectionActuelle.compareTo("Bouteille") == 0)
+			{
+				affichage.setModel(bouteille);
+				affichage.repaint();
 			}
 		}
 	}
@@ -291,6 +309,8 @@ public class FenetrePrincipale extends JFrame
 		/**
 		 * 
 		 */
+		private String[] enteteBreuvage = {"Id", "Nom", "Nom Brasserie", "Couleur"
+				,"Fermentation","Provenance","Lieu d'origine","Pays d'origine"};
 		private static final long serialVersionUID = 1L;
 		private final List<Breuvage> breuvage = new ArrayList<Breuvage>();
 		
@@ -356,6 +376,7 @@ public class FenetrePrincipale extends JFrame
 		/**
 		 * 
 		 */
+		private String[] enteteBrasserie = {"Id","Nom","Nom Brasserie"};
 		private static final long serialVersionUID = 1L;
 		private final List<Brasserie> brasserie = new ArrayList<Brasserie>();
 		
@@ -455,7 +476,8 @@ public class FenetrePrincipale extends JFrame
 	 
 	        fireTableRowsInserted(lieuOrigine.size() -1, lieuOrigine.size() -1);
 	    }
-		public void removeLieuOrigine(int rowIndex) {
+		public void removeLieuOrigine(int rowIndex) 
+		{
 			lieuOrigine.remove(rowIndex);
 	 
 	        fireTableRowsDeleted(rowIndex, rowIndex);

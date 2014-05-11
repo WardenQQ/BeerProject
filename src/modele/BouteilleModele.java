@@ -1,7 +1,13 @@
+package modele;
+
 import java.util.ArrayList;
+
+import javax.swing.table.AbstractTableModel;
+
 import gestionBiere.Bouteille;
 
-public class BouteilleModele {
+public class BouteilleModele extends AbstractTableModel 
+{
     private static final long serialVersionUID = 1L;
     private final String[] entete = {"Nom breuvage", "Type", "Taille", "Type bouchon", "lienPhoto"};
     private ArrayList<Bouteille> listeBouteille;
