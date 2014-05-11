@@ -33,6 +33,7 @@ public class BaseDonnee {
             listeFermentation = new ArrayList<StringBuffer>();
             listeTypeFermentation = new ArrayList<StringBuffer>();
             listeProvenance = new ArrayList<StringBuffer>();
+            listeTypeBouteille = new ArrayList<StringBuffer>();
             listeBouchon = new ArrayList<StringBuffer>();
     }
 
@@ -44,6 +45,7 @@ public class BaseDonnee {
     public ArrayList<StringBuffer> getListeFermentation() { return listeFermentation; }
     public ArrayList<StringBuffer> getListeTypeFermentation() { return listeTypeFermentation; }
     public ArrayList<StringBuffer> getListeProvenance() { return listeProvenance; }
+    public ArrayList<StringBuffer> getListeTypeBouteille() { return listeTypeBouteille; }
     public ArrayList<StringBuffer> getListeBouchon() { return listeBouchon; }
 
     public BaseDonnee(String nomFichier) {
