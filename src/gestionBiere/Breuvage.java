@@ -104,8 +104,8 @@ public class Breuvage implements Serializable {
         this.brasserie = brasserie;
     }
 
-    public String getCouleur() {
-        return couleur.toString();
+    public StringBuffer getCouleur() {
+        return couleur;
     }
 
     public void setCouleur(StringBuffer couleur) {
@@ -115,8 +115,8 @@ public class Breuvage implements Serializable {
         this.couleur = couleur;
     }
 
-    public String getFermentation() {
-        return fermentation.toString();
+    public StringBuffer getFermentation() {
+        return fermentation;
     }
 
     public void setFermentation(StringBuffer fermentation) {
@@ -126,8 +126,8 @@ public class Breuvage implements Serializable {
         this.fermentation = fermentation;
     }
 
-    public String getTypeFermentation() {
-        return typeFermentation.toString();
+    public StringBuffer getTypeFermentation() {
+        return typeFermentation;
     }
 
     public void setTypeFermentation(StringBuffer typeFermentation) {
@@ -137,8 +137,8 @@ public class Breuvage implements Serializable {
         this.typeFermentation = typeFermentation;
     }
 
-    public String getProvenance() {
-        return provenance.toString();
+    public StringBuffer getProvenance() {
+        return provenance;
     }
 
     public void setProvenance(StringBuffer provenance) {
