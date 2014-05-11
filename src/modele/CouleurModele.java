@@ -35,4 +35,31 @@ public class CouleurModele extends AbstractTableModel
                 return null;
         }
     }
+
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return true;
+    }
+
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+        StringBuffer couleur = listeCouleur.get(rowIndex);
+
+        switch (columnIndex) {
+            case 0:
+                couleur.replace(0, couleur.length(), (String)aValue);
+                break;
+            default:
+        }
+    }
+
+    public void ajoutCouleur() {
+        listeCouleur.add(new StringBuffer());
+
+        fireTableRowsInserted(listeCouleur.size() - 1, listeCouleur.size() - 1);
+    }
+    
+    public void suppressionCouleur(int rowIndex) {
+        listeCouleur.remove(rowIndex);
+
+        fireTableRowsInserted(rowIndex, rowIndex);
+    }
 }

@@ -35,4 +35,16 @@ public class TypeFermentationModele extends AbstractTableModel
                 return null;
         }
     }
+
+    public void ajoutTypeFermentation() {
+        listeTypeFermentation.add(new StringBuffer());
+
+        fireTableRowsInserted(listeTypeFermentation.size() - 1, listeTypeFermentation.size() - 1);
+    }
+    
+    public void suppressionTypeFermentation(int rowIndex) {
+        listeTypeFermentation.remove(rowIndex);
+
+        fireTableRowsInserted(rowIndex, rowIndex);
+    }
 }

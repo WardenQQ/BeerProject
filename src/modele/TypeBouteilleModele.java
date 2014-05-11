@@ -35,4 +35,16 @@ public class TypeBouteilleModele extends AbstractTableModel
                 return null;
         }
     }
+
+    public void ajoutTypeBouteille() {
+        listeTypeBouteille.add(new StringBuffer());
+
+        fireTableRowsInserted(listeTypeBouteille.size() - 1, listeTypeBouteille.size() - 1);
+    }
+    
+    public void suppressionTypeBouteille(int rowIndex) {
+        listeTypeBouteille.remove(rowIndex);
+
+        fireTableRowsInserted(rowIndex, rowIndex);
+    }
 }

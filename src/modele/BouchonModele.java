@@ -35,4 +35,16 @@ public class BouchonModele extends AbstractTableModel
                 return null;
         }
     }
+
+    public void ajoutBouchon() {
+        listeBouchon.add(new StringBuffer());
+
+        fireTableRowsInserted(listeBouchon.size() - 1, listeBouchon.size() - 1);
+    }
+    
+    public void suppressionBouchon(int rowIndex) {
+        listeBouchon.remove(rowIndex);
+
+        fireTableRowsInserted(rowIndex, rowIndex);
+    }
 }

@@ -35,4 +35,16 @@ public class ProvenanceModele extends AbstractTableModel
                 return null;
         }
     }
+
+    public void ajoutProvenance() {
+        listeProvenance.add(new StringBuffer());
+
+        fireTableRowsInserted(listeProvenance.size() - 1, listeProvenance.size() - 1);
+    }
+    
+    public void suppressionProvenance(int rowIndex) {
+        listeProvenance.remove(rowIndex);
+
+        fireTableRowsInserted(rowIndex, rowIndex);
+    }
 }
