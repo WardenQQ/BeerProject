@@ -49,7 +49,7 @@ public class BouteilleModele extends AbstractTableModel
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return true;
     }
-    
+
     public void ajoutBouteille() {
         listeBouteille.add(new Bouteille());
 

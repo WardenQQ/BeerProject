@@ -40,6 +40,19 @@ public class TypeBouteilleModele extends AbstractTableModel
         return true;
     }
 
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+        if (aValue != null) {
+            StringBuffer typeBouteille = listeTypeBouteille.get(rowIndex);
+
+            switch (columnIndex) {
+                case 0:
+                    typeBouteille.replace(0, typeBouteille.length(), (String)aValue);
+                    break;
+                default:
+            }
+        }
+    }
+
     public void ajoutTypeBouteille() {
         listeTypeBouteille.add(new StringBuffer());
 

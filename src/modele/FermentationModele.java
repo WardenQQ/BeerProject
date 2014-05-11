@@ -40,6 +40,19 @@ public class FermentationModele extends AbstractTableModel
         return true;
     }
 
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+        if (aValue != null) {
+            StringBuffer fermentation = listeFermentation.get(rowIndex);
+
+            switch (columnIndex) {
+                case 0:
+                    fermentation.replace(0, fermentation.length(), (String)aValue);
+                    break;
+                default:
+            }
+        }
+    }
+
     public void ajoutFermentation() {
         listeFermentation.add(new StringBuffer());
 

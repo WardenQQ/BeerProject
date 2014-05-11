@@ -40,6 +40,19 @@ public class TypeFermentationModele extends AbstractTableModel
         return true;
     }
 
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+        if (aValue != null) {
+            StringBuffer typeFermentation = listeTypeFermentation.get(rowIndex);
+
+            switch (columnIndex) {
+                case 0:
+                    typeFermentation.replace(0, typeFermentation.length(), (String)aValue);
+                    break;
+                default:
+            }
+        }
+    }
+
     public void ajoutTypeFermentation() {
         listeTypeFermentation.add(new StringBuffer());
 
