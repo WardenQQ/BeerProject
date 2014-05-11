@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
 import gestionBiere.Breuvage;
+import gestionBiere.LieuOrigine;
 
-public class BreuvageModele extends AbstractTableModel 
+public class BreuvageModele extends AbstractTableModel implements Observer
 {
     private static final long serialVersionUID = 1L;
     private final String[] entete = {
@@ -90,5 +91,44 @@ public class BreuvageModele extends AbstractTableModel
         listeBreuvage.remove(rowIndex);
 
         fireTableRowsInserted(rowIndex, rowIndex);
+    }
+
+    public void notify(String string, Object obj) {
+        if (string.equals("Couleur")) {
+            for (Breuvage ite : listeBreuvage) {
+                if (ite.getCouleur() == obj) {
+                    ite.setCouleur(new StringBuffer());
+                    break;
+                }
+            }
+        } else if (string.equals("Fermentation")) {
+            for (Breuvage ite : listeBreuvage) {
+                if (ite.getFermentation() == obj) {
+                    ite.setFermentation(new StringBuffer());
+                    break;
+                }
+            }
+        } else if (string.equals("TypeFermentation")) {
+            for (Breuvage ite : listeBreuvage) {
+                if (ite.getTypeFermentation() == obj) {
+                    ite.setTypeFermentation(new StringBuffer());
+                    break;
+                }
+            }
+        } else if (string.equals("Provenance")) {
+            for (Breuvage ite : listeBreuvage) {
+                if (ite.getProvenance() == obj) {
+                    ite.setProvenance(new StringBuffer());
+                    break;
+                }
+            }
+        } else if (string.equals("LieuOrigine")) {
+            for (Breuvage ite : listeBreuvage) {
+                if (ite.getLieuOrigine() == obj) {
+                    ite.setLieuOrigine(new LieuOrigine());
+                    break;
+                }
+            }
+        }
     }
 }
