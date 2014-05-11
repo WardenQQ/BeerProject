@@ -59,4 +59,21 @@ public class BrasserieModele extends AbstractTableModel
 
         fireTableRowsInserted(rowIndex, rowIndex);
     }
+    
+    public void setValueAt(Object aValue,int rowIndex, int columnIndex)
+    {
+    	if (aValue != null) {
+    		Brasserie listeBrasserie = this.listeBrasserie.get(rowIndex);
+    		
+    		switch(columnIndex)
+    		{		 
+    			case 2 : 
+    				listeBrasserie.getNom().replace(0,
+    						listeBrasserie.getNom().length(), (String)aValue);
+    				break;
+    			default :
+    				break;
+    		}
+    	}
+    }
 }

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
-import gestionBiere.Bouteille;
 import gestionBiere.Breuvage;
 import gestionBiere.LieuOrigine;
 
@@ -84,38 +83,26 @@ public class BreuvageModele extends AbstractTableModel implements Observer
     		Breuvage listeBreuvage = this.listeBreuvage.get(rowIndex);
     		
     		switch (columnIndex) {
-            	case 1:
-            		listeBreuvage.getNom().replace(0, listeBreuvage.getNom().length(),(String)aValue);
-            	case 2:
-                	listeBreuvage.getBrasserie().getNom().replace(0,
-                			listeBreuvage.getBrasserie().getNom().length(),
-                			(String)aValue);
-                	break;
-            case 3:
-            	listeBreuvage.getBrasserie().getNom().replace(0,
-            			listeBreuvage.getBrasserie().getLieuOrigine().getNom().length(),
-            			(String)aValue);
-            	break;
-            /*case 4:
-                return listeBreuvage.get(rowIndex).getLieuOrigine().getPaysAppartenance();
-            case 5:
-                return listeBreuvage.get(rowIndex).getTauxAlcool();
-            case 6:
-                return listeBreuvage.get(rowIndex).getAnneeOrigine();
-            case 7:
-                return listeBreuvage.get(rowIndex).getCouleur();
-            case 8:
-                return listeBreuvage.get(rowIndex).getFermentation();
-            case 9:
-                return listeBreuvage.get(rowIndex).getTypeFermentation();
-            case 10:
-                return listeBreuvage.get(rowIndex).getProvenance();
-            case 11:
-                return listeBreuvage.get(rowIndex).getCommentaireDegustation();
-            case 12:
-                return listeBreuvage.get(rowIndex).getCommentaireLibre();*/
-            default:
-                break;
+            	case 1 :
+            		listeBreuvage.getNom().replace(0, listeBreuvage.getNom().length(),
+    						(String)aValue);
+            		break;
+            	case 5 :
+            		listeBreuvage.setTauxAlcool(((Integer)aValue).intValue());
+            		break;
+            	case 6 :
+            		listeBreuvage.setAnneeOrigine(((Integer)aValue).intValue());
+            		break;
+            	case 11 :
+            		listeBreuvage.getCommentaireDegustation().replace(0,
+            				listeBreuvage.getCommentaireDegustation().length(), (String)aValue);
+            		break;
+            	case 12 :
+            		listeBreuvage.getCommentaireLibre().replace(0,
+            				listeBreuvage.getCommentaireLibre().length(), (String)aValue);
+            		break;
+            	default:
+            		break;
     		}
     	}
     }

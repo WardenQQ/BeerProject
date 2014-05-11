@@ -42,6 +42,25 @@ public class LieuOrigineModele extends AbstractTableModel
         }
     }
 
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+        if (aValue != null) {
+            LieuOrigine listeLieuOrigine = this.listeLieuOrigine.get(rowIndex);
+
+            switch (columnIndex) {
+                case 1:
+                    listeLieuOrigine.getNom().replace(0,
+                    		listeLieuOrigine.getNom().length(), (String)aValue);
+                    break;
+                case 2:
+                	listeLieuOrigine.getPaysAppartenance().replace(0,
+                    		listeLieuOrigine.getPaysAppartenance().length(), (String)aValue);
+                	break;
+                default:
+                	break;
+            }
+        }
+    }
+    
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return true;
     }

@@ -73,7 +73,8 @@ public class BouteilleModele extends AbstractTableModel
     				listeBouteille.setTailleBouteille(((Integer)aValue).intValue());
     				break;
     			case 4 :
-    				listeBouteille.getLienPhoto().replace(0, listeBouteille.getLienPhoto().length(), (String)aValue);
+    				listeBouteille.getLienPhoto().replace(0, listeBouteille.getLienPhoto().length(),
+    						(String)aValue);
     				break;
     			default :
     				break;

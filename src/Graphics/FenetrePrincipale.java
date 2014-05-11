@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -18,9 +17,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
+
 import javax.swing.RowFilter;
-import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 
@@ -42,6 +40,7 @@ public class FenetrePrincipale extends JFrame
 	private Dimension dimPanMenuLateral = new Dimension(170,600);
 	private Dimension dimPanRecherche = new Dimension(1000,40);
 	private Dimension dimText = new Dimension(200,40);
+	private JButton cancelRech = new JButton("Annuler Recherche");
 	private String nomFichier = "breuvage.bdd";
 	private BaseDonnee bdd = new BaseDonnee(nomFichier);
 	private String selectionActuelle = "Breuvage";
@@ -96,6 +95,10 @@ public class FenetrePrincipale extends JFrame
 		affichage.setAutoCreateRowSorter(true);
 		affichage.setPreferredSize(dimTab);
 		
+		cancelRech.setPreferredSize(dimBouton);
+		cancelRech.addActionListener(new annulerRech());
+		cancelRech.setVisible(false);
+		
 		label.setPreferredSize(dimBouton);
 		
 		okButton.addActionListener(new boutonRech());
@@ -131,6 +134,7 @@ public class FenetrePrincipale extends JFrame
 		JScrollPane sp = new JScrollPane(affichage);
 		sp.setPreferredSize(new Dimension(dimTab));
 		barreRecherche.add(okButton,BorderLayout.CENTER);
+		barreRecherche.add(cancelRech,BorderLayout.CENTER);
 		
 		menu.add(barreRecherche, BorderLayout.NORTH);
 		menu.add(sp,BorderLayout.SOUTH);
@@ -240,7 +244,24 @@ public class FenetrePrincipale extends JFrame
 		        sorter.setRowFilter(RowFilter.regexFilter(regex, 0));
 		        affichage.setRowSorter(sorter);
 			}
+			else if (selectionActuelle.compareTo("Type Bouteille") == 0)
+			{
+				TableRowSorter<TypeBouteilleModele> sorter = new TableRowSorter<TypeBouteilleModele>();
+				sorter.setModel(typeB);
+				String regex = JOptionPane.showInputDialog("Recherche dans la base : ");	 
+		        sorter.setRowFilter(RowFilter.regexFilter(regex, 0));
+		        affichage.setRowSorter(sorter);
+			}
+			else if (selectionActuelle.compareTo("Type Fermentation") == 0)
+			{
+				TableRowSorter<TypeFermentationModele> sorter = new TableRowSorter<TypeFermentationModele>();
+				sorter.setModel(typeF);
+				String regex = JOptionPane.showInputDialog("Recherche dans la base : ");	 
+		        sorter.setRowFilter(RowFilter.regexFilter(regex, 0));
+		        affichage.setRowSorter(sorter);
+			}
 			
+			cancelRech.setVisible(true);
 		}
 	}
 	
@@ -249,7 +270,47 @@ public class FenetrePrincipale extends JFrame
 		public void actionPerformed(ActionEvent e)
 		{
 			int aSupprimer = affichage.getSelectedRow();
-			couleur.suppressionCouleur(aSupprimer);
+			selectionActuelle = choixListe.getSelectedItem().toString();
+			if (selectionActuelle.compareTo("Brasserie") == 0)
+			{
+				brasserie.suppressionBrasserie(aSupprimer);
+			}
+			else if (selectionActuelle.compareTo("Breuvage") == 0)
+			{
+				breuvage.suppressionBreuvage(aSupprimer);
+			}
+			else if (selectionActuelle.compareTo("Lieu origine") == 0)
+			{
+				lieuOrigine.suppressionLieuOrigine(aSupprimer);
+			}
+			else if (selectionActuelle.compareTo("Fermentation") == 0)
+			{
+				fermentation.suppressionFermentation(aSupprimer);
+			}
+			else if (selectionActuelle.compareTo("Bouteille") == 0)
+			{
+				bouteille.suppressionBouteille(aSupprimer);
+			}
+			else if (selectionActuelle.compareTo("Type Bouteille") == 0)
+			{
+				typeB.suppressionTypeBouteille(aSupprimer);
+			}
+			else if (selectionActuelle.compareTo("Type Fermentation") == 0)
+			{
+				typeF.suppressionTypeFermentation(aSupprimer);
+			}
+			else if (selectionActuelle.compareTo("Provenance") == 0)
+			{
+				provenance.suppressionProvenance(aSupprimer);
+			}
+			else if (selectionActuelle.compareTo("Couleur") == 0)
+			{
+				couleur.suppressionCouleur(aSupprimer);
+			}
+			else if (selectionActuelle.compareTo("Bouchon") == 0)
+			{
+				bouchon.suppressionBouchon(aSupprimer);
+			}
 		}
 	}
 	
@@ -301,11 +362,21 @@ public class FenetrePrincipale extends JFrame
 		}
 	}
 	
+	class annulerRech implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+			affichage.setRowSorter(null);
+			cancelRech.setVisible(false);
+		}
+	}
+	
 	class choixAffichage implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
 		{
 			selectionActuelle = choixListe.getSelectedItem().toString();
+			cancelRech.setVisible(false);
 			if (selectionActuelle.compareTo("Brasserie") == 0)
 			{
 				affichage.setModel(brasserie);
