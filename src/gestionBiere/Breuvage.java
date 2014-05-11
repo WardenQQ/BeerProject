@@ -184,4 +184,12 @@ public class Breuvage implements Serializable {
         }
         this.commentaireLibre = commentaireLibre;
     }
+
+    public static int getCompteur() {
+        return compteur;
+    }
+
+    public static void setCompteur(int compteur) {
+        Breuvage.compteur = compteur;
+    }
 }

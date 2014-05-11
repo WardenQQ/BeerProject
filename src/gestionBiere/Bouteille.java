@@ -98,4 +98,12 @@ public class Bouteille implements Serializable {
     public int getIdentifiant() {
         return this.identifiant;
     }
+
+    public static int getCompteur() {
+        return compteur;
+    }
+
+    public static void setCompteur(int compteur) {
+        Bouteille.compteur = compteur;
+    }
 }

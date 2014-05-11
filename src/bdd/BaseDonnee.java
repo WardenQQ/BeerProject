@@ -72,6 +72,9 @@ public class BaseDonnee {
             os.writeObject(listeProvenance);
             os.writeObject(listeTypeBouteille);
             os.writeObject(listeBouchon);
+            os.writeObject(new Integer(Breuvage.getCompteur()));
+            os.writeObject(new Integer(Brasserie.getCompteur()));
+            os.writeObject(new Integer(Bouteille.getCompteur()));
 
             os.close();
             aSauve = true;
@@ -100,6 +103,9 @@ public class BaseDonnee {
                 listeProvenance = (ArrayList<StringBuffer>)is.readObject();
                 listeTypeBouteille = (ArrayList<StringBuffer>)is.readObject();
                 listeBouchon = (ArrayList<StringBuffer>)is.readObject();
+                Breuvage.setCompteur((Integer)is.readObject());
+                Brasserie.setCompteur((Integer)is.readObject());
+                Bouteille.setCompteur((Integer)is.readObject());
 
                 is.close();
                 aCharge = true;

@@ -35,9 +35,12 @@ public class Brasserie implements Serializable {
         return isEqual;
     }
 
-    public int getIdentifiant() { return identifiant;}
+    public int getIdentifiant() {
+        return identifiant;
+    }
 
     public StringBuffer getNom() { return nom;}
+
     public void setNom(StringBuffer nom) {
         if (nom == null) {
             nom = new StringBuffer();
@@ -46,10 +49,20 @@ public class Brasserie implements Serializable {
     }
 
     public LieuOrigine getLieuOrigine() { return lieuOrigine;}
+
     public void setLieuOrigine(LieuOrigine lieuOrigine) {
         if (lieuOrigine == null) {
             lieuOrigine = new LieuOrigine();
         }
         this.lieuOrigine = lieuOrigine;
+    }
+
+
+    public static int getCompteur() {
+        return compteur;
+    }
+
+    public static void setCompteur(int compteur) {
+        Brasserie.compteur = compteur;
     }
 }
