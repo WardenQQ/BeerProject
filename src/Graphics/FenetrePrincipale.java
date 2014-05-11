@@ -183,10 +183,64 @@ public class FenetrePrincipale extends JFrame
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			TableRowSorter<BreuvageModele> sorter = new TableRowSorter<BreuvageModele>();
-			sorter.setModel(breuvage);
-			String regex = JOptionPane.showInputDialog("Recherche dans la base : ");	 
-	        sorter.setRowFilter(RowFilter.regexFilter(regex, 0, 1));		
+			selectionActuelle = choixListe.getSelectedItem().toString();
+			if (selectionActuelle.compareTo("Brasserie") == 0)
+			{
+				TableRowSorter<BrasserieModele> sorter = new TableRowSorter<BrasserieModele>();
+				sorter.setModel(brasserie);
+				String regex = JOptionPane.showInputDialog("Recherche dans la base : ");	 
+		        sorter.setRowFilter(RowFilter.regexFilter(regex, 1,2,3));
+		        affichage.setRowSorter(sorter);
+			}
+			else if (selectionActuelle.compareTo("Breuvage") == 0)
+			{
+				TableRowSorter<BreuvageModele> sorter = new TableRowSorter<BreuvageModele>();
+				sorter.setModel(breuvage);
+				String regex = JOptionPane.showInputDialog("Recherche dans la base : ");	 
+		        sorter.setRowFilter(RowFilter.regexFilter(regex, 1,2,3,4,6,7,8,9,10,11));
+		        affichage.setRowSorter(sorter);
+			}
+			else if (selectionActuelle.compareTo("Lieu origine") == 0)
+			{
+				TableRowSorter<LieuOrigineModele> sorter = new TableRowSorter<LieuOrigineModele>();
+				sorter.setModel(lieuOrigine);
+				String regex = JOptionPane.showInputDialog("Recherche dans la base : ");	 
+		        sorter.setRowFilter(RowFilter.regexFilter(regex, 1,2));
+		        affichage.setRowSorter(sorter);
+			}
+			else if (selectionActuelle.compareTo("Fermentation") == 0)
+			{
+				TableRowSorter<FermentationModele> sorter = new TableRowSorter<FermentationModele>();
+				sorter.setModel(fermentation);
+				String regex = JOptionPane.showInputDialog("Recherche dans la base : ");	 
+		        sorter.setRowFilter(RowFilter.regexFilter(regex, 1));
+		        affichage.setRowSorter(sorter);
+			}
+			else if (selectionActuelle.compareTo("Bouteille") == 0)
+			{
+				TableRowSorter<BouteilleModele> sorter = new TableRowSorter<BouteilleModele>();
+				sorter.setModel(bouteille);
+				String regex = JOptionPane.showInputDialog("Recherche dans la base : ");	 
+		        sorter.setRowFilter(RowFilter.regexFilter(regex, 0,1,2,3));
+		        affichage.setRowSorter(sorter);
+			}
+			else if (selectionActuelle.compareTo("Couleur") == 0)
+			{
+				TableRowSorter<CouleurModele> sorter = new TableRowSorter<CouleurModele>();
+				sorter.setModel(couleur);
+				String regex = JOptionPane.showInputDialog("Recherche dans la base : ");	 
+		        sorter.setRowFilter(RowFilter.regexFilter(regex, 0));
+		        affichage.setRowSorter(sorter);
+			}
+			else if (selectionActuelle.compareTo("Provenance") == 0)
+			{
+				TableRowSorter<ProvenanceModele> sorter = new TableRowSorter<ProvenanceModele>();
+				sorter.setModel(provenance);
+				String regex = JOptionPane.showInputDialog("Recherche dans la base : ");	 
+		        sorter.setRowFilter(RowFilter.regexFilter(regex, 0));
+		        affichage.setRowSorter(sorter);
+			}
+			
 		}
 	}
 	
