@@ -76,6 +76,10 @@ public class BreuvageModele extends AbstractTableModel
         }
     }
 
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return columnIndex > 0;
+    }
+
     public void ajoutBreuvage() {
         listeBreuvage.add(new Breuvage());
 

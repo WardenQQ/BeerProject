@@ -36,6 +36,10 @@ public class ProvenanceModele extends AbstractTableModel
         }
     }
 
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return true;
+    }
+
     public void ajoutProvenance() {
         listeProvenance.add(new StringBuffer());
 

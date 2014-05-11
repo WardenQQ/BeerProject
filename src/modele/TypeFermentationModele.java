@@ -36,6 +36,10 @@ public class TypeFermentationModele extends AbstractTableModel
         }
     }
 
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return true;
+    }
+
     public void ajoutTypeFermentation() {
         listeTypeFermentation.add(new StringBuffer());
 

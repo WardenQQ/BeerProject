@@ -44,6 +44,10 @@ public class BrasserieModele extends AbstractTableModel
         }
     }
 
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return columnIndex > 0;
+    }
+
     public void ajoutBrasserie() {
         listeBrasserie.add(new Brasserie());
 

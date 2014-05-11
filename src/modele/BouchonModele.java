@@ -36,6 +36,10 @@ public class BouchonModele extends AbstractTableModel
         }
     }
 
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return true;
+    }
+
     public void ajoutBouchon() {
         listeBouchon.add(new StringBuffer());
 

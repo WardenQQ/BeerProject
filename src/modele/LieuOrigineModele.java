@@ -42,6 +42,10 @@ public class LieuOrigineModele extends AbstractTableModel
         }
     }
 
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return true;
+    }
+
     public void ajoutLieuOrigine() {
         listeLieuOrigine.add(new LieuOrigine());
 

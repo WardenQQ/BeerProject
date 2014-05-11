@@ -36,6 +36,10 @@ public class TypeBouteilleModele extends AbstractTableModel
         }
     }
 
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return true;
+    }
+
     public void ajoutTypeBouteille() {
         listeTypeBouteille.add(new StringBuffer());
 
