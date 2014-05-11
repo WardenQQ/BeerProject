@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
 import gestionBiere.Bouteille;
+import gestionBiere.Brasserie;
 import gestionBiere.Breuvage;
 import gestionBiere.LieuOrigine;
 
 public class BreuvageModele extends AbstractTableModel implements Observer
 {
     private static final long serialVersionUID = 1L;
+
     private final String[] entete = {
         "Identifiant",
         "Nom du breuvage",
@@ -26,11 +28,14 @@ public class BreuvageModele extends AbstractTableModel implements Observer
         "Commentaire de dégustation",
         "Commentaire de libre"
     };
+
     private ArrayList<Breuvage> listeBreuvage;
+    ArrayList<Observer> listeObserver;
 
     public BreuvageModele(ArrayList<Breuvage> listeBreuvage) {
         super();
         this.listeBreuvage = listeBreuvage;
+        this.listeObserver = new ArrayList<Observer>();
     }
 
     public int getRowCount() {
@@ -124,9 +129,23 @@ public class BreuvageModele extends AbstractTableModel implements Observer
     }
     
     public void suppressionBreuvage(int rowIndex) {
-        listeBreuvage.remove(rowIndex);
+        Object objSupprimer = listeBreuvage.remove(rowIndex);
 
         fireTableRowsInserted(rowIndex, rowIndex);
+
+        notifyObserver("Breuvage", objSupprimer);
+    }
+
+    public void ajoutObserver(Observer observer) {
+        if (observer != null) {
+            listeObserver.add(observer);
+        }
+    }
+
+    private void notifyObserver(String string, Object obj) {
+        for (Observer ite : listeObserver) {
+            ite.notify(string, obj);
+        }
     }
 
     public void notify(String string, Object obj) {
@@ -155,6 +174,13 @@ public class BreuvageModele extends AbstractTableModel implements Observer
             for (Breuvage ite : listeBreuvage) {
                 if (ite.getProvenance() == obj) {
                     ite.setProvenance(new StringBuffer());
+                    break;
+                }
+            }
+        } else if (string.equals("Brasserie")) {
+            for (Breuvage ite : listeBreuvage) {
+                if (ite.getBrasserie() == obj) {
+                    ite.setBrasserie(new Brasserie());
                     break;
                 }
             }

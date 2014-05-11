@@ -7,12 +7,16 @@ import javax.swing.table.AbstractTableModel;
 public class FermentationModele extends AbstractTableModel 
 {
     private static final long serialVersionUID = 1L;
+
     private final String[] entete = { "Fermentation" };
+
     private ArrayList<StringBuffer> listeFermentation;
+    ArrayList<Observer> listeObserver;
 
     public FermentationModele(ArrayList<StringBuffer> listeFermentation) {
         super();
         this.listeFermentation = listeFermentation;
+        this.listeObserver = new ArrayList<Observer>();
     }
 
     public int getRowCount() {
@@ -58,10 +62,24 @@ public class FermentationModele extends AbstractTableModel
 
         fireTableRowsInserted(listeFermentation.size() - 1, listeFermentation.size() - 1);
     }
-    
+
     public void suppressionFermentation(int rowIndex) {
-        listeFermentation.remove(rowIndex);
+        Object objSupprimer = listeFermentation.remove(rowIndex);
 
         fireTableRowsInserted(rowIndex, rowIndex);
+
+        notify("Fermentation", objSupprimer);
+    }
+
+    public void ajoutObserver(Observer observer) {
+        if (observer != null) {
+            listeObserver.add(observer);
+        }
+    }
+
+    private void notify(String string, Object obj) {
+        for (Observer ite : listeObserver) {
+            ite.notify(string, obj);
+        }
     }
 }

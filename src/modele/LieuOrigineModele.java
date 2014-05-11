@@ -9,8 +9,11 @@ import gestionBiere.LieuOrigine;
 public class LieuOrigineModele extends AbstractTableModel 
 {
     private static final long serialVersionUID = 1L;
+
     private final String[] entete = { "Identifiant", "Ville d'origine", "Pays d'origine" };
+
     private ArrayList<LieuOrigine> listeLieuOrigine;
+    ArrayList<Observer> listeObserver;
 
     public LieuOrigineModele(ArrayList<LieuOrigine> listeLieuOrigine) {
         super();
@@ -53,8 +56,22 @@ public class LieuOrigineModele extends AbstractTableModel
     }
     
     public void suppressionLieuOrigine(int rowIndex) {
-        listeLieuOrigine.remove(rowIndex);
+        Object objSupprimer = listeLieuOrigine.remove(rowIndex);
 
         fireTableRowsInserted(rowIndex, rowIndex);
+
+        notify("Provenance", objSupprimer);
+    }
+
+    public void ajoutObserver(Observer observer) {
+        if (observer != null) {
+            listeObserver.add(observer);
+        }
+    }
+
+    private void notify(String string, Object obj) {
+        for (Observer ite : listeObserver) {
+            ite.notify(string, obj);
+        }
     }
 }
