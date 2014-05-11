@@ -77,19 +77,25 @@ public class BreuvageModele extends AbstractTableModel
         }
     }
 
-    /*public void setValueAt(Object aValue,int rowIndex, int columnIndex)
+    public void setValueAt(Object aValue,int rowIndex, int columnIndex)
     {
     	if (aValue != null) {
     		Breuvage listeBreuvage = this.listeBreuvage.get(rowIndex);
     		
     		switch (columnIndex) {
             	case 1:
-            		listeBreuvage.getNom().replace(0, listeBreuvage.getNom().length(), (String)aValue);
-            case 2:
-                return listeBreuvage.get(rowIndex).getBrasserie().getNom();
+            		listeBreuvage.getNom().replace(0, listeBreuvage.getNom().length(),(String)aValue);
+            	case 2:
+                	listeBreuvage.getBrasserie().getNom().replace(0,
+                			listeBreuvage.getBrasserie().getNom().length(),
+                			(String)aValue);
+                	break;
             case 3:
-                return listeBreuvage.get(rowIndex).getLieuOrigine().getNom();
-            case 4:
+            	listeBreuvage.getBrasserie().getNom().replace(0,
+            			listeBreuvage.getBrasserie().getLieuOrigine().getNom().length(),
+            			(String)aValue);
+            	break;
+            /*case 4:
                 return listeBreuvage.get(rowIndex).getLieuOrigine().getPaysAppartenance();
             case 5:
                 return listeBreuvage.get(rowIndex).getTauxAlcool();
@@ -106,11 +112,12 @@ public class BreuvageModele extends AbstractTableModel
             case 11:
                 return listeBreuvage.get(rowIndex).getCommentaireDegustation();
             case 12:
-                return listeBreuvage.get(rowIndex).getCommentaireLibre();
+                return listeBreuvage.get(rowIndex).getCommentaireLibre();*/
             default:
                 break;
+    		}
     	}
-    }*/
+    }
     
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return columnIndex > 0;
