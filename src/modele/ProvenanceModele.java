@@ -40,6 +40,19 @@ public class ProvenanceModele extends AbstractTableModel
         return true;
     }
 
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+        if (aValue != null) {
+            StringBuffer provenance = listeProvenance.get(rowIndex);
+
+            switch (columnIndex) {
+                case 0:
+                    provenance.replace(0, provenance.length(), (String)aValue);
+                    break;
+                default:
+            }
+        }
+    }
+
     public void ajoutProvenance() {
         listeProvenance.add(new StringBuffer());
 

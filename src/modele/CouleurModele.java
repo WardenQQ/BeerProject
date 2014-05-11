@@ -41,13 +41,15 @@ public class CouleurModele extends AbstractTableModel
     }
 
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        StringBuffer couleur = listeCouleur.get(rowIndex);
+        if (aValue != null) {
+            StringBuffer couleur = listeCouleur.get(rowIndex);
 
-        switch (columnIndex) {
-            case 0:
-                couleur.replace(0, couleur.length(), (String)aValue);
-                break;
-            default:
+            switch (columnIndex) {
+                case 0:
+                    couleur.replace(0, couleur.length(), (String)aValue);
+                    break;
+                default:
+            }
         }
     }
 

@@ -40,6 +40,19 @@ public class BouchonModele extends AbstractTableModel
         return true;
     }
 
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+        if (aValue != null) {
+            StringBuffer bouchon = listeBouchon.get(rowIndex);
+
+            switch (columnIndex) {
+                case 0:
+                    bouchon.replace(0, bouchon.length(), (String)aValue);
+                    break;
+                default:
+            }
+        }
+    }
+
     public void ajoutBouchon() {
         listeBouchon.add(new StringBuffer());
 
